@@ -9,8 +9,9 @@ import { FcOvertime } from 'react-icons/fc'
 import { ImBooks } from 'react-icons/im'
 
 
-export default function Headercard() {
 
+export default function Headercard() {
+  const [loading, setLoading] = useState(false);
   const [student, setstudent] = useState([]);
   const [courses, setcourses] = useState([]);
   const [atendence, setatendence] = useState([]);
@@ -19,6 +20,7 @@ export default function Headercard() {
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const collections = collection(db, "students");
       const docs = await getDocs(collections);
       const studentdata = [];
@@ -32,7 +34,7 @@ export default function Headercard() {
     } catch (error) {
       console.log(error);
     } finally {
-      // setLoading(false); // Set loading to false after fetching
+      setLoading(false); // Set loading to false after fetching
     }
   };
 
@@ -102,7 +104,11 @@ export default function Headercard() {
             </div>
           </div>
           <div className="font-bold text-[#7072da] m-10 text-2xl">
-            {courses.length}
+            {loading ? (<tr className="text-center">
+                                <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+                                    Loading...
+                                </td>
+                            </tr>):(courses.length)}
           </div>
         </div>
         <div className="rounded-lg bg-white h-40 border-b-8  border-[#868a88] shadow-sm">
@@ -113,7 +119,14 @@ export default function Headercard() {
             </div>
           </div>
           <div className="font-bold text-[#868a88] m-10 text-2xl">
-            {student.length}
+
+            {loading ? (
+                            <tr className="text-center">
+                                <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
+                                    Loading...
+                                </td>
+                            </tr>
+                        ):(student.length)}
           </div>
         </div>
         <div className="rounded-lg bg-white border-b-8  border-[#8B635C] h-40 shadow-sm">
