@@ -15,6 +15,7 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleDelete = async (id) => {
     console.log(`Deleting item with ID ${id}`);
@@ -56,6 +57,7 @@ export default function Page() {
 
   const fetchDocs = async () => {
     try {
+      setLoading(true)
       const collectionName = collection(db, "students");
       const docs = await getDocs(collectionName);
       const studentData = [];
@@ -68,6 +70,8 @@ export default function Page() {
       setStudent(studentData);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -197,8 +201,14 @@ export default function Page() {
             </tr>
           </thead>
           <tbody>
-            {student?.map((studentItem, i) => (
-              <tr key={i}>
+            {loading ? (
+              <tr className="text-center">
+                <td colSpan="4" className="text-xl text-orange-900 font-bold mt-10">
+                  Loading...
+                </td>
+              </tr>
+            ) : (student?.map((studentItem, i) => (
+              <tr key={i} className="hover:bg-gray-100 hover:text-[#0B6DA2] mt-3 text-white text-center border-b border-orange-200">
                 <td className="px-6 py-4">{studentItem.name}</td>
                 <td className="px-6 py-4">{studentItem.studentId}</td>
                 <td className="px-6 py-4">{studentItem.email}</td>
@@ -220,7 +230,7 @@ export default function Page() {
                   </button>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>

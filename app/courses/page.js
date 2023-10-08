@@ -13,7 +13,7 @@ export default function Page() {
     const [course, setCourse] = useState("");
     const [courseCode, setCourseCode] = useState("");
     const [description, setDescription] = useState("");
-  
+    const [loading, setLoading] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 
     const handleDelete = async (id) => {
@@ -40,9 +40,9 @@ export default function Page() {
             const docRef = doc(db, "courses", selectedItem.id); // Update data in "courses" collection
 
             await updateDoc(docRef, {
-               course, // Update course
-               courseCode, // Update courseCode
-               description, // Update description
+                course, // Update course
+                courseCode, // Update courseCode
+                description, // Update description
             });
 
             closeModal(); // Close the modal and clear the selected item
@@ -54,6 +54,7 @@ export default function Page() {
 
     const fetchDocs = async () => {
         try {
+            setLoading(true);
             const collectionName = collection(db, "courses");
             const docs = await getDocs(collectionName);
             const courseData = [];
@@ -66,6 +67,8 @@ export default function Page() {
             setCourses(courseData);
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -76,9 +79,9 @@ export default function Page() {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
         const newCourse = {
-           course,
-           courseCode,
-           description
+            course,
+            courseCode,
+            description
         };
 
         try {
@@ -150,7 +153,7 @@ export default function Page() {
                             />
                         </div>
                     </div>
-                 
+
                     <div className="md:flex md:items-center">
                         <div className="md:w-1/3"></div>
                         <div className="md:w-2/3">
@@ -178,8 +181,15 @@ export default function Page() {
                         </tr>
                     </thead>
                     <tbody>
-                        {courses.map((courseItem, i) => (
-                            <tr key={i}>
+                        {loading ? (
+                            <tr className="text-center">
+                                <td colSpan="4" className="text-xl text-orange-900 font-bold mt-10">
+                                    Loading...
+                                </td>
+                            </tr>
+                        ) :(
+                            courses.map((courseItem, i) => (
+                            <tr key={i} className="hover:bg-gray-100 hover:text-[#0B6DA2] mt-3 text-white text-center border-b border-orange-200">
                                 <td className="px-6 py-4">{courseItem.course}</td>
                                 <td className="px-6 py-4">{courseItem.courseCode}</td>
                                 <td className="px-6 py-4">{courseItem.description}</td>
@@ -200,7 +210,9 @@ export default function Page() {
                                     </button>
                                 </td>
                             </tr>
-                        ))}
+                        )))}
+
+
                     </tbody>
                 </table>
             </div>
@@ -286,7 +298,7 @@ export default function Page() {
                                         />
                                     </div>
                                 </div>
-                               
+
                                 <div className="flex justify-center">
                                     <button
                                         type="submit"

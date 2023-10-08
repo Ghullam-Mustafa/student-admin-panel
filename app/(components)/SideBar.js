@@ -1,11 +1,11 @@
 'use client'
 import { forwardRef } from "react";
 import Link from "next/link";
-import { HomeIcon, CreditCardIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { HiUserGroup } from 'react-icons/hi'
 import { FcOvertime } from 'react-icons/fc'
 import { ImBooks } from 'react-icons/im'
+import {RiHome2Fill} from 'react-icons/ri'
 
 const SideBar = forwardRef(({ showNav }, ref) => {
   const router = useRouter();
@@ -15,8 +15,8 @@ const SideBar = forwardRef(({ showNav }, ref) => {
       <div className="flex justify-center mt-6 mb-14">
         <picture className="pt-5">
           <img
-            className="w-32 h-auto"
-            src="/saylani.jpg"
+            className="w-50 h-auto"
+            src="/OIMZ3J0.jpg"
             alt="company logo"
           />
         </picture>
@@ -32,7 +32,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
           >
             <div className="mr-2">
 
-              <HiUserGroup className="h-5 w-5" />
+              <RiHome2Fill className="text-xl" />
             </div>
             <div>
               <p className=" font-mono	font-bold text-3xl">Home</p>
@@ -48,7 +48,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
           >
             <div className="mr-2">
 
-              <HiUserGroup className="h-5 w-5" />
+              <HiUserGroup className="text-2xl" />
             </div>
             <div>
               <p>Students</p>
@@ -63,7 +63,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               }`}
           >
             <div className="mr-2">
-              <FcOvertime className="h-5 w-5" />
+              <FcOvertime className="text-2xl" />
             </div>
             <div>
               <p>Attendence</p>
@@ -79,7 +79,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               }`}
           >
             <div className="mr-2">
-              <ImBooks className="h-5 w-5" />
+              <ImBooks className="text-2xl" />
             </div>
             <div>
               <p>Courses</p>
