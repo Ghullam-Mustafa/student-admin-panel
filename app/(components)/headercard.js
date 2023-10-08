@@ -1,5 +1,28 @@
+"use client"
+import { useState, useEffect } from 'react';
 import {GiBookshelf} from "react-icons/gi"
 export default function Headercard() {
+
+  const fetchDocs = async () => {
+    try {
+        const collectionName = collection(db, "courses");
+        const docs = await getDocs(collectionName);
+        const courseData = [];
+        docs.forEach((doc) => {
+            courseData.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+        setCourses(courseData);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+useEffect(() => {
+    fetchDocs();
+}, []);
   return (
     <>
 
@@ -9,6 +32,7 @@ export default function Headercard() {
         <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
             <div className="flex justify-between px-8 py-2 ">
              <p className="  font-sans text-xl text-[#7072da] p-1 ">Total Courses</p>
+             <p>{}</p>
               <div className="rounded-full p-2  bg-[#7072da] ">
                 <GiBookshelf className="text-2xl font-bold"/>
               </div>
