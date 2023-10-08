@@ -23,7 +23,23 @@ const SideBar = forwardRef(({ showNav }, ref) => {
       </div>
 
       <div className="flex flex-col">
-        <Link href="/">
+      <Link href="/">
+          <div
+            className={`pl-6 py-3 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
+                ? "bg-orange-100 text-[#9697DB]"
+                : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
+              }`}
+          >
+            <div className="mr-2">
+
+              <HiUserGroup className="h-5 w-5" />
+            </div>
+            <div>
+              <p className=" font-mono	font-bold text-3xl">Home</p>
+            </div>
+          </div>
+        </Link>
+        <Link href="/students">
           <div
             className={`pl-6 py-3 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
                 ? "bg-orange-100 text-[#9697DB]"
@@ -39,7 +55,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/account" >
+        <Link href="/attendence" >
           <div
             className={`pl-6 py-3 mx-5  text-center cursor-pointer hover:drop-shadow-2xl mb-3 rounded-full flex items-center transition-colors ${router.pathname == "/account"
                 ? "bg-orange-100 text-[#9697DB]"
@@ -54,7 +70,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/billing">
+        <Link href="/courses">
           <div
             className={`pl-6 py-3 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
              mb-3 flex items-center transition-colors ${router.pathname == "/billing"
