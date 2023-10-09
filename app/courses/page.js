@@ -189,7 +189,7 @@ export default function Page() {
                             </tr>
                         ) :(
                             courses.map((courseItem, i) => (
-                            <tr key={i} className="hover:bg-gray-100 hover:text-[#0B6DA2] mt-3 text-white text-center border-b border-orange-200">
+                            <tr key={i} className="hover:bg-gray-800 hover:text-[#0B6DA2] mt-3 text-white text-center border-b border-orange-200">
                                 <td className="px-6 py-4">{courseItem.course}</td>
                                 <td className="px-6 py-4">{courseItem.courseCode}</td>
                                 <td className="px-6 py-4">{courseItem.description}</td>

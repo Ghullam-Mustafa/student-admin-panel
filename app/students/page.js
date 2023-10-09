@@ -208,7 +208,7 @@ export default function Page() {
                 </td>
               </tr>
             ) : (student?.map((studentItem, i) => (
-              <tr key={i} className="hover:bg-gray-100 hover:text-[#0B6DA2] mt-3 text-white text-center border-b border-orange-200">
+              <tr key={i} className="hover:bg-gray-800 hover:text-[#7ecdf8] mt-3 text-white text-center border-b border-orange-200">
                 <td className="px-6 py-4">{studentItem.name}</td>
                 <td className="px-6 py-4">{studentItem.studentId}</td>
                 <td className="px-6 py-4">{studentItem.email}</td>
