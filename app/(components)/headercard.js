@@ -61,12 +61,12 @@ export default function Headercard() {
     }
   };
 
-  const fetchattendense = async () => {
+  const fetchAttendense = async () => {
     try {
       // setLoading(true);
-      const collections = collection(db, "attendance");
-      const queryRef = query(collections, where("isPresent", "==", true));
-      const docs = await getDocs(queryRef);
+      const collections = collection(db, "attendence");
+      // const queryRef = query(collections, where("isPresent", "==", true));
+      const docs = await getDocs(collections);
       const studentdata = [];
       docs.forEach((doc) => {
         studentdata.push({
@@ -85,7 +85,7 @@ export default function Headercard() {
   useEffect(() => {
     fetchData();
     fetchcourses()
-    fetchattendense()
+    fetchAttendense()
   }, []);
 
 
@@ -137,7 +137,14 @@ export default function Headercard() {
             </div>
           </div>
           <div className="font-bold text-[#8B635C] m-10 text-2xl">
-            10
+        
+          {loading ? (
+                            <tr className="text-center">
+                                <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
+                                    Loading...
+                                </td>
+                            </tr>
+                        ):(atendence.length)}
           </div>
         </div>
       </div>
