@@ -224,7 +224,8 @@ export default function Page() {
     const students = {
       name,
       studentId,
-     
+      // email,
+      // phoneNumber
     };
 
     try {
