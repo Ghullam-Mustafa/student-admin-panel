@@ -127,7 +127,7 @@ export default function Page() {
                                 <td className='border-black border text-left px-8'>
                                     C.N.I.C. / B-form No
                                     <input
-                                        className='px-2' 
+                                        className='px-2'
                                         type='text'
                                         pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'
                                         title='Type CNIC Like 12345-1234567-1'
@@ -137,7 +137,7 @@ export default function Page() {
                                 </td>
                                 <td className='border-black border text-left px-8 flex'>
                                     <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                    <div className=""> <input className='px-2'  type="text" name="" id="" placeholder="Enter your Phone Number" /></div>
+                                    <div className=""> <input className='px-2' type="text" name="" id="" placeholder="Enter your Phone Number" /></div>
                                 </td>
 
                             </tr>
@@ -146,11 +146,11 @@ export default function Page() {
                                     <div className="">Mark of Identification <input className='px-2' type="text" name="" id="" placeholder="Mark of Identification" /> </div>
                                 </td>
                                 <td className='border-black border text-left px-8'>
-                                    <div className="">Date of Birth:<input className='px-2'  type="date" name="" id="" placeholder="Enter your Date of Birth" /> </div>
+                                    <div className="">Date of Birth:<input className='px-2' type="date" name="" id="" placeholder="Enter your Date of Birth" /> </div>
                                 </td>
 
                             </tr>
-                            
+
 
 
                         </table>
@@ -215,6 +215,46 @@ export default function Page() {
 
 
                     </div>
+                </div>
+
+                <div className=" py-6 w-full overflow-x-auto">
+                    <p className=' text-red-600 text-2xl font-bold'>EDUCATIONAL PROFILE</p>
+                    <div>
+                        <table>
+                            <tr>
+                                <th className='text-left border-black border px-2'>Qualification</th>
+                                <th className='text-left border-black border px-2'>Year</th>
+                                <th className='text-left border-black border px-2'>Board Roll #</th>
+                                <th className='text-left border-black border px-2'>Obtained</th>
+                                <th className='text-left border-black border px-2'>T.Marks</th>
+                                <th className='text-left border-black border px-2'>Institute / University</th>
+
+                            </tr>
+                            <tr >
+                                <td className='border-black border text-left font-bold ' >Matriculation</td>
+                                <td className='border-black border text-left '> <input type="text" name="" id="" /> </td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                            </tr>
+                            <tr>
+                                <td className='border-black border text-left font-bold '>Others</td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
+                <p className=' text-red-600 text-2xl font-bold'>DOCUMENTS REQUIRED</p>
+
+                <div className="border-black border-4">
+
                 </div>
             </div>
         </>
