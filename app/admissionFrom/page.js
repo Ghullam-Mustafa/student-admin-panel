@@ -251,10 +251,46 @@ export default function Page() {
                     </div>
                 </div>
 
+                <p className=' text-red-600 text-2xl font-bold py-3'>DOCUMENTS REQUIRED</p>
+
+                <div className="border-black  border-2 p-2 flex justify-between">
+                    <div>
+                        
+                        <ol>
+                            <li className='text-l font-bold'>1- Three Passport Size Pictures with Blue Back Ground</li>
+                            <li className='text-l font-bold'>3- Matric Roll No Slip Coppy and Result Card Copy</li>
+                            <li className='text-l font-bold'>4- College First Installement and Registration Fee</li>
+                        </ol>
+                    </div>
+                    <div>
+                        
+                        <ol>
+                            <li className='text-l font-bold'>2- Students CNIC OR B-Form Photocopy</li>
+                            <li className='text-l font-bold'>4- Father CNIC Copy</li>
+                            <li className='text-l font-bold'>5- Orignal NOC (in case of Matric pass from other Board)</li>
+                        </ol>
+                    </div>
+                </div>
+
                 <p className=' text-red-600 text-2xl font-bold'>DOCUMENTS REQUIRED</p>
 
-                <div className="border-black border-4">
-
+                <div className="border-black  border-2 p-2 flex justify-between">
+                    <div>
+                        
+                        <ol>
+                            <li className='text-l font-bold'>1- Three Passport Size Pictures with Blue Back Ground</li>
+                            <li className='text-l font-bold'>3- Matric Roll No Slip Coppy and Result Card Copy</li>
+                            <li className='text-l font-bold'>4- College First Installement and Registration Fee</li>
+                        </ol>
+                    </div>
+                    <div>
+                        
+                        <ol>
+                            <li className='text-l font-bold'>2- Students CNIC OR B-Form Photocopy</li>
+                            <li className='text-l font-bold'>4- Father CNIC Copy</li>
+                            <li className='text-l font-bold'>5- Orignal NOC (in case of Matric pass from other Board)</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </>
