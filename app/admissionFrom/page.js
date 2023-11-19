@@ -16,7 +16,7 @@ export default function Page() {
                     <div className="flex col-span-9 items-center px-5">
                         <div className="flex flex-col items-center">
                             <p className="text-blue-500 text-3xl font-bold border-b-2 border-red-500 ">TIPS COLLEGE OF SCIENCE & COMMERCE</p>
-                            <p className="text-xl font-bold">A College with Professional Excellence</p>
+                            <p className="text-xl font-bold italic">A College with Professional Excellence</p>
                         </div>
                     </div>
                 </div>
@@ -272,25 +272,29 @@ export default function Page() {
                     </div>
                 </div>
 
-                <p className=' text-red-600 text-2xl font-bold'>DOCUMENTS REQUIRED</p>
+                <p className=' text-red-600 text-2xl py-4 font-bold'>DOCUMENTS REQUIRED</p>
 
-                <div className="border-black  border-2 p-2 flex justify-between">
+                <div className="border-black  border-2 p-2 ">
                     <div>
                         
                         <ol>
-                            <li className='text-l font-bold'>1- Three Passport Size Pictures with Blue Back Ground</li>
-                            <li className='text-l font-bold'>3- Matric Roll No Slip Coppy and Result Card Copy</li>
-                            <li className='text-l font-bold'>4- College First Installement and Registration Fee</li>
+                            <li className='text-l font-bold'>1- All the students are obligatory to obey the college rules & regulations.</li>
+                            <li className='text-l font-bold'>2- Students are required to attend 85% classes during the session. </li>
+                            <li className='text-l font-bold'>3- Students with more than  days absent in a month without propr application would be struck off. To reinstate Rs:2000/- will be charged. </li>
+                            <li className='text-l font-bold'>4- Fee once paid is non-refundable and non-transferable. </li>
+                            <li className='text-l font-bold'>5- Collage dues would be payable according to the plan announced by the management. </li>
+                            <li className='text-l font-bold'>6- A fine of Rs. 500/-will be sharged per day for late fee and Rs:200/- per day for any absent from the class. </li>
+                            <li className='text-l font-bold'>7- Students are advised to wear proper uniform.Casual Footwear is not allowed </li>
+                            <li className='text-l font-bold'>8- Smoking is strickly prohibited in college premises. </li>
+                            <li className='text-l font-bold'>9- College Management reserves the right to make any amendments in policy  without any notice and expel any student without assigning any reason if deemed fit. </li>
+                            <li className='text-l font-bold'>10- Application form would be received only if completed in all respect. </li>
+                            <li className='text-l font-bold'>11- No  discount or concession will be allowed after signing off this admission form. </li>
+                            <li className='text-l font-bold'>12- No admisssion form will be accepted without father / Guardaian and Applicant signature </li>
+
+                            
                         </ol>
                     </div>
-                    <div>
-                        
-                        <ol>
-                            <li className='text-l font-bold'>2- Students CNIC OR B-Form Photocopy</li>
-                            <li className='text-l font-bold'>4- Father CNIC Copy</li>
-                            <li className='text-l font-bold'>5- Orignal NOC (in case of Matric pass from other Board)</li>
-                        </ol>
-                    </div>
+                    
                 </div>
             </div>
         </>
