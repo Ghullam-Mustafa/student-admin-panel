@@ -255,7 +255,7 @@ export default function Page() {
 
                 <div className="border-black  border-2 p-2 flex justify-between">
                     <div>
-                        
+
                         <ol>
                             <li className='text-l font-bold'>1- Three Passport Size Pictures with Blue Back Ground</li>
                             <li className='text-l font-bold'>3- Matric Roll No Slip Coppy and Result Card Copy</li>
@@ -263,7 +263,7 @@ export default function Page() {
                         </ol>
                     </div>
                     <div>
-                        
+
                         <ol>
                             <li className='text-l font-bold'>2- Students CNIC OR B-Form Photocopy</li>
                             <li className='text-l font-bold'>4- Father CNIC Copy</li>
@@ -276,7 +276,7 @@ export default function Page() {
 
                 <div className="border-black  border-2 p-2 ">
                     <div>
-                        
+
                         <ol>
                             <li className='text-l font-bold'>1- All the students are obligatory to obey the college rules & regulations.</li>
                             <li className='text-l font-bold'>2- Students are required to attend 85% classes during the session. </li>
@@ -291,10 +291,30 @@ export default function Page() {
                             <li className='text-l font-bold'>11- No  discount or concession will be allowed after signing off this admission form. </li>
                             <li className='text-l font-bold'>12- No admisssion form will be accepted without father / Guardaian and Applicant signature </li>
 
-                            
+
                         </ol>
                     </div>
-                    
+
+                </div>
+
+
+                <p className=' text-red-600 text-2xl py-4 font-bold'>DECLARATION</p>
+
+                <div className="border-black  border-2 p-2 ">
+                    <div>
+
+                        <ol>
+                            <li className='text-l font-bold'>I solemnly declare, confirm and certify that:.</li>
+                            <li className='text-l font-bold'>1- I have provided complete and accurate information of all the particulars in the application. </li>
+                            <li className='text-l font-bold'>2- I will obey all the rules and regulations of the college. </li>
+                            <li className='text-l font-bold'>3- I accept that college authorities will not be held responsible regarding any Board / Instition matter. </li>
+                            <li className='text-l font-bold'>4- I will be liable to any penalty including  rustication or expulsion is case of any violation of the college rulees & regulations on my part . </li>
+                            <li className='text-l font-bold'>5- I will have no objection if I am detained either before  or at the time of Board / Institution Examination due to any Irregularity. </li>
+                            
+
+                        </ol>
+                    </div>
+
                 </div>
             </div>
         </>
