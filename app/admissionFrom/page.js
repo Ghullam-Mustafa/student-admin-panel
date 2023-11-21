@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { PiPhoneCallBold } from 'react-icons/pi';
 import { FaWhatsapp } from "react-icons/fa6";
+import { db } from '@/config/firebase';
+import { addDoc, collection, getDocs,  } from 'firebase/firestore';
 export default function Page() {
 
     const [form, setForm] = useState([]);
@@ -30,6 +32,11 @@ export default function Page() {
     const [obtainedMarks, setObtainedMarks] = useState('');
     const [totalMarks, setTotalMarks] = useState('');
     const [insitute, setinsitute] = useState('');
+    const [otherYear, setOtherYear] = useState('');
+    const [otherRollNo, setOtherRollNo] = useState('');
+    const [OtherObtainedMarks, setOtherObtainedMarks] = useState('');
+    const [othetTotalMarks, setOtherTotalMarks] = useState('');
+    const [otherInsitute, setOthertinsitute] = useState('');
 
 
 
@@ -49,7 +56,29 @@ export default function Page() {
           selectedCourse,
           admissionType,
           studentName,
-          phoneNumber,
+          studentphoneNumber,
+          studentCnic,
+          studentWhatsappNumber,
+          markOfIdentification,
+          dateOfBirth,
+          fatherName,
+          fatherPhoneNumber,
+          fatherCnic,
+          fatherWhatsappNumber,
+          fatherOccupation,
+          Religion,
+          homeAddress,
+          studentEmail,
+          matriculationYear,
+          boardRollNo,
+          obtainedMarks,
+          totalMarks,
+          insitute,
+          otherYear,
+          otherRollNo,
+          OtherObtainedMarks,
+          othetTotalMarks,
+          otherInsitute
         };
     
         try {
@@ -59,6 +88,28 @@ export default function Page() {
           fetchDocs(); // Refresh the list after adding a new student
         } catch (e) {
           console.error("This code has an error ", e);
+        }
+      };
+
+
+
+      const fetchDocs = async () => {
+        try {
+          setLoading(true)
+          const collectionName = collection(db, "Forms");
+          const docs = await getDocs(collectionName);
+          const studentData = [];
+          docs.forEach((doc) => {
+            studentData.push({
+              id: doc.id,
+              ...doc.data()
+            });
+          });
+          setStudent(studentData);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false)
         }
       };
 
@@ -181,12 +232,12 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="studentName" id="studentName"  placeholder="Enter your Name" value={studentName} onChange={(e)= setStudentName(e.target.value)} required /> </div>
+                                        <div className="">Name : <input type="text" name="studentName" id="studentName"  placeholder="Enter your Name" value={studentName} onChange={(e)=> setStudentName(e.target.value)} required /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="studentphoneNumber" id="studentphoneNumber" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$' value={studentphoneNumber} onChange={(e)= setStudentPhoneNumber(e.target.value)}
+                                        <div className=""> <input type="text" name="studentphoneNumber" id="studentphoneNumber" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$' value={studentphoneNumber} onChange={(e)=> setStudentPhoneNumber(e.target.value)}
                                             title='Type CNIC Like 03300000000'
                                             required
                                               /></div>
@@ -206,21 +257,21 @@ export default function Page() {
                                             placeholder='(331000-0000000-0)'
                                             id='studentCnic'
                                             value={studentCnic}
-                                            onChange={(e)= setStudentCnic(e.target.value)}
+                                            onChange={(e)=> setStudentCnic(e.target.value)}
                                         />
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input className='px-2' type="text" name="studentWhatsappNumber" id="studentWhatsappNumber" placeholder="Enter your Phone Number"  pattern='^[0-9]{11}$' required value={studentWhatsappNumber}  onChange={(e)= setStudentWhatsappNumber(e.target.value)}/></div>
+                                        <div className=""> <input className='px-2' type="text" name="studentWhatsappNumber" id="studentWhatsappNumber" placeholder="Enter your Phone Number"  pattern='^[0-9]{11}$' required value={studentWhatsappNumber}  onChange={(e)=> setStudentWhatsappNumber(e.target.value)}/></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Mark of Identification <input className='px-2' type="text" name="markOfIdentification" id="markOfIdentification"  placeholder="Mark of Identification" required value={markOfIdentification}  onChange={(e)= setMarkOfIdentification(e.target.value)} /> </div>
+                                        <div className="">Mark of Identification <input className='px-2' type="text" name="markOfIdentification" id="markOfIdentification"  placeholder="Mark of Identification" required value={markOfIdentification}  onChange={(e)=> setMarkOfIdentification(e.target.value)} /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Date of Birth:<input className='px-2' type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Enter your Date of Birth" required value={dateOfBirth}  onChange={(e)= setDateOfBirth(e.target.value)} /> </div>
+                                        <div className="">Date of Birth:<input className='px-2' type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Enter your Date of Birth" required value={dateOfBirth}  onChange={(e)=> setDateOfBirth(e.target.value)} /> </div>
                                     </td>
 
                                 </tr>
@@ -241,12 +292,12 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="fatherName" id="fatherName" placeholder="Enter your Father Name" required value={fatherName} onChange={(e)= setFatherName(e.target.value)} /> </div>
+                                        <div className="">Name : <input type="text" name="fatherName" id="fatherName" placeholder="Enter your Father Name" required value={fatherName} onChange={(e)=> setFatherName(e.target.value)} /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="fatherPhoneNumber" id="fatherPhoneNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherPhoneNumber} onChange={(e)= setFatherPhoneNumber(e.target.value)} /></div>
+                                        <div className=""> <input type="text" name="fatherPhoneNumber" id="fatherPhoneNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherPhoneNumber} onChange={(e)=> setFatherPhoneNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
@@ -263,28 +314,28 @@ export default function Page() {
                                             id='fatherCnic'
                                             name='fatherCnic'
                                             value={fatherCnic}
-                                            onChange={(e)= setFahterCnic(e.target.value)}
+                                            onChange={(e)=>setFahterCnic(e.target.value)}
 
                                         />
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input type="text" name="fatherWhatsappNumber" id="fatherWhatsappNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherWhatsappNumber} onChange={(e)= setFatherWhatsappNumber(e.target.value)} /></div>
+                                        <div className=""> <input type="text" name="fatherWhatsappNumber" id="fatherWhatsappNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherWhatsappNumber} onChange={(e)=> setFatherWhatsappNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Occupation : <input type="text" name="fatherOccupation" id="fatherOccupation" placeholder="Occupation" required value={fatherOccupation} onChange={(e)= setFatherOccupation(e.target.value)} /> </div>
+                                        <div className="">Occupation : <input type="text" name="fatherOccupation" id="fatherOccupation" placeholder="Occupation" required value={fatherOccupation} onChange={(e)=> setFatherOccupation(e.target.value)} /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Religion<input type="text" name="Religion" id="Religion" placeholder="Religion" required value={Religion} onChange={(e)= setReligion(e.target.value)} /> </div>
+                                        <div className="">Religion<input type="text" name="Religion" id="Religion" placeholder="Religion" required value={Religion} onChange={(e)=> setReligion(e.target.value)} /> </div>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="homeAddress" id="homeAddress" placeholder="Enter your home address " required value={homeAddress} onChange={(e)= setHomeAddress(e.target.value)} />  </td>
-                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="studentEmail" id="studentEmail" placeholder="Enter your Email address " required value={studentEmail}  onChange={(e)= setStudentEmail(e.target.value)} /></td>
+                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="homeAddress" id="homeAddress" placeholder="Enter your home address " required value={homeAddress} onChange={(e)=> setHomeAddress(e.target.value)} />  </td>
+                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="studentEmail" id="studentEmail" placeholder="Enter your Email address " required value={studentEmail}  onChange={(e)=> setStudentEmail(e.target.value)} /></td>
 
                                 </tr>
 
@@ -311,19 +362,19 @@ export default function Page() {
                                 </tr>
                                 <tr >
                                     <td className='border-black border text-left font-bold ' >Matriculation</td>
-                                    <td className='border-black border text-left '> <input type="text" name="" id="" required /> </td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '> <input type="text" name="matriculationYear" id="matriculationYear" value={matriculationYear} onChange={(e)=> setMatriculationYear(e.target.value)} required /> </td>
+                                    <td className='border-black border text-left '><input type="text" name="boardRollNo" id="boardRollNo" value={boardRollNo} onChange={(e)=> setBoardRollNo(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="obtainedMarks" id="obtainedMarks" value={obtainedMarks} onChange={(e)=> setObtainedMarks(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="totalMarks" id="totalMarks" value={totalMarks} onChange={(e)=> setTotalMarks(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="insitute" id="insitute" value={insitute} onChange={(e)=> setinsitute(e.target.value)} required/></td>
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left font-bold '>Others</td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="otherYear" id="otherYear"  value={otherYear} onChange={(e)=> setOtherYear(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="otherRollNo" id="otherRollNo" value={otherRollNo} onChange={(e)=> setOtherRollNo(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="OtherObtainedMarks" id="OtherObtainedMarks" value={OtherObtainedMarks} onChange={(e)=> setOtherObtainedMarks(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="othetTotalMarks" id="othetTotalMarks" value={othetTotalMarks} onChange={(e)=> setOtherTotalMarks(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="otherInsitute" id="otherInsitute" value={otherInsitute}  onChange={(e)=> setOthertinsitute(e.target.value)} required/></td>
                                 </tr>
                             </table>
 
