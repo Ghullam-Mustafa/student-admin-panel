@@ -11,7 +11,20 @@ export default function Page() {
     const [form, setForm] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState('');
     const [admissionType, setAdmissionType] = useState('');
-
+    const [studentName, setStudentName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [studentCnic, setStudentCnic] = useState('');
+    const [studentWhatsappNumber, setStudentWhatsappNumber] = useState('');
+    const [markOfIdentification, setMarkOfIdentification] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [fatherName, setFatherName] = useState('');
+    const [fatherPhoneNumber, setFatherPhoneNumber] = useState('');
+    const [fatherCnic, setFahterCnic] = useState('');
+    const [fatherWhatsappNumber, setFatherWhatsappNumber] = useState('');
+    const [fatherOccupation, setFatherOccupation] = useState('');
+    const [Religion, setReligion] = useState('');
+    const [homeAddress, setHomeAddress] = useState('');
+    const [studentEmail, setStudentEmail] = useState('');
     const handleCourseChange = (event) => {
         setSelectedCourse(event.target.value);
     };
@@ -139,7 +152,7 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="" id="" placeholder="Enter your Name" required /> </div>
+                                        <div className="">Name : <input type="text" name="studentName" id="name"  placeholder="Enter your Name" required /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
