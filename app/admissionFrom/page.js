@@ -12,7 +12,7 @@ export default function Page() {
     const [selectedCourse, setSelectedCourse] = useState('');
     const [admissionType, setAdmissionType] = useState('');
     const [studentName, setStudentName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [studentphoneNumber, setStudentPhoneNumber] = useState('');
     const [studentCnic, setStudentCnic] = useState('');
     const [studentWhatsappNumber, setStudentWhatsappNumber] = useState('');
     const [markOfIdentification, setMarkOfIdentification] = useState('');
@@ -25,6 +25,16 @@ export default function Page() {
     const [Religion, setReligion] = useState('');
     const [homeAddress, setHomeAddress] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
+    const [matriculationYear, setMatriculationYear] = useState('');
+    const [boardRollNo, setBoardRollNo] = useState('');
+    const [obtainedMarks, setObtainedMarks] = useState('');
+    const [totalMarks, setTotalMarks] = useState('');
+    const [insitute, setinsitute] = useState('');
+
+
+
+    
+
     const handleCourseChange = (event) => {
         setSelectedCourse(event.target.value);
     };
@@ -33,11 +43,30 @@ export default function Page() {
         setAdmissionType(event.target.value);
     };
 
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+        const AddmissionForm = {
+          selectedCourse,
+          admissionType,
+          studentName,
+          phoneNumber,
+        };
+    
+        try {
+          const collectionName = collection(db, "AddmissionForm");
+          await addDoc(collectionName, AddmissionForm);
+          console.log("Code is working");
+          fetchDocs(); // Refresh the list after adding a new student
+        } catch (e) {
+          console.error("This code has an error ", e);
+        }
+      };
 
     const handleSubmit = () => {
         // Access the selected course value (stored in selectedCourse state)
         console.log('Selected Course:', selectedCourse);
         console.log('Admission type:', admissionType);
+        console.log('Student Name :', studentName)
         // Replace the following line with your actual form submission logic
         // Example: You can send the form data to the server
     };
@@ -47,7 +76,7 @@ export default function Page() {
         <>
             <div className='bg-white border-2 border-black p-2'>
 
-                <form   >
+                <form   onSubmit={onSubmitHandler} >
                     <div className="grid grid-cols-12">
                         <div className="col-span-3">
                             <Image src="/logo.png" alt="graph" height={50} width={100} />
@@ -152,12 +181,12 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="studentName" id="name"  placeholder="Enter your Name" required /> </div>
+                                        <div className="">Name : <input type="text" name="studentName" id="studentName"  placeholder="Enter your Name" value={studentName} onChange={(e)= setStudentName(e.target.value)} required /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$'
+                                        <div className=""> <input type="text" name="studentphoneNumber" id="studentphoneNumber" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$' value={studentphoneNumber} onChange={(e)= setStudentPhoneNumber(e.target.value)}
                                             title='Type CNIC Like 03300000000'
                                             required
                                               /></div>
@@ -175,20 +204,23 @@ export default function Page() {
                                             title='Type CNIC Like 12345-1234567-1'
                                             required
                                             placeholder='(331000-0000000-0)'
+                                            id='studentCnic'
+                                            value={studentCnic}
+                                            onChange={(e)= setStudentCnic(e.target.value)}
                                         />
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input className='px-2' type="text" name="" id="" placeholder="Enter your Phone Number"  pattern='^[0-9]{11}$' required/></div>
+                                        <div className=""> <input className='px-2' type="text" name="studentWhatsappNumber" id="studentWhatsappNumber" placeholder="Enter your Phone Number"  pattern='^[0-9]{11}$' required value={studentWhatsappNumber}  onChange={(e)= setStudentWhatsappNumber(e.target.value)}/></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Mark of Identification <input className='px-2' type="text" name="" id="" placeholder="Mark of Identification" required /> </div>
+                                        <div className="">Mark of Identification <input className='px-2' type="text" name="markOfIdentification" id="markOfIdentification"  placeholder="Mark of Identification" required value={markOfIdentification}  onChange={(e)= setMarkOfIdentification(e.target.value)} /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Date of Birth:<input className='px-2' type="date" name="" id="" placeholder="Enter your Date of Birth" required /> </div>
+                                        <div className="">Date of Birth:<input className='px-2' type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Enter your Date of Birth" required value={dateOfBirth}  onChange={(e)= setDateOfBirth(e.target.value)} /> </div>
                                     </td>
 
                                 </tr>
@@ -209,12 +241,12 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="" id="" placeholder="Enter your Name" required /> </div>
+                                        <div className="">Name : <input type="text" name="fatherName" id="fatherName" placeholder="Enter your Father Name" required value={fatherName} onChange={(e)= setFatherName(e.target.value)} /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' /></div>
+                                        <div className=""> <input type="text" name="fatherPhoneNumber" id="fatherPhoneNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherPhoneNumber} onChange={(e)= setFatherPhoneNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
@@ -228,26 +260,31 @@ export default function Page() {
                                             title='Type CNIC Like 12345-1234567-1'
                                             required
                                             placeholder='(331000-0000000-0)'
+                                            id='fatherCnic'
+                                            name='fatherCnic'
+                                            value={fatherCnic}
+                                            onChange={(e)= setFahterCnic(e.target.value)}
+
                                         />
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$'/></div>
+                                        <div className=""> <input type="text" name="fatherWhatsappNumber" id="fatherWhatsappNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherWhatsappNumber} onChange={(e)= setFatherWhatsappNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Occupation : <input type="text" name="" id="" placeholder="Occupation" required /> </div>
+                                        <div className="">Occupation : <input type="text" name="fatherOccupation" id="fatherOccupation" placeholder="Occupation" required value={fatherOccupation} onChange={(e)= setFatherOccupation(e.target.value)} /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Religion<input type="text" name="" id="" placeholder="Religion" required /> </div>
+                                        <div className="">Religion<input type="text" name="Religion" id="Religion" placeholder="Religion" required value={Religion} onChange={(e)= setReligion(e.target.value)} /> </div>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="" id="" placeholder="Enter your home address " required />  </td>
-                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="" id="" placeholder="Enter your Email address " required /></td>
+                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="homeAddress" id="homeAddress" placeholder="Enter your home address " required value={homeAddress} onChange={(e)= setHomeAddress(e.target.value)} />  </td>
+                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="studentEmail" id="studentEmail" placeholder="Enter your Email address " required value={studentEmail}  onChange={(e)= setStudentEmail(e.target.value)} /></td>
 
                                 </tr>
 
@@ -267,7 +304,7 @@ export default function Page() {
                                     <th className='text-left border-black border px-2'>Qualification</th>
                                     <th className='text-left border-black border px-2'>Year</th>
                                     <th className='text-left border-black border px-2'>Board Roll #</th>
-                                    <th className='text-left border-black border px-2'>Obtained</th>
+                                    <th className='text-left border-black border px-2'>Obtained Marks</th>
                                     <th className='text-left border-black border px-2'>T.Marks</th>
                                     <th className='text-left border-black border px-2'>Institute / University</th>
 
