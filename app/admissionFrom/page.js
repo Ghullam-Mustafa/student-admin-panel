@@ -9,6 +9,25 @@ import { FaWhatsapp } from "react-icons/fa6";
 export default function Page() {
 
     const [form, setForm] = useState([]);
+    const [selectedCourse, setSelectedCourse] = useState('');
+    const [admissionType, setAdmissionType] = useState('');
+
+    const handleCourseChange = (event) => {
+        setSelectedCourse(event.target.value);
+    };
+
+    const handleAdmissionType = (event) => {
+        setAdmissionType(event.target.value);
+    };
+
+
+    const handleSubmit = () => {
+        // Access the selected course value (stored in selectedCourse state)
+        console.log('Selected Course:', selectedCourse);
+        console.log('Admission type:', admissionType);
+        // Replace the following line with your actual form submission logic
+        // Example: You can send the form data to the server
+    };
 
 
     return (
@@ -36,19 +55,19 @@ export default function Page() {
                                 <div className="flex justify-between">
                                     <div className="flex px-2">
                                         <label className="flex items-center space-x-2" htmlFor="FScPreEngineering">
-                                            <input type="radio" id="ICS" name="course" />
+                                            <input type="radio" id="ICS" name="course" value='F.Sc Pre-Engineering'  checked={selectedCourse === 'F.Sc Pre-Engineering'} onChange={handleCourseChange} />
                                             <span className=' text-red-600 text-xl font-bold'>F.Sc Pre-Engineering</span>
                                         </label>
                                     </div>
                                     <div className="flex px-2">
                                         <label className="flex items-center space-x-2" htmlFor="FScMedical">
-                                            <input type="radio" id="ICS" name="course" />
+                                            <input type="radio" id="ICS" name="course" value='F.Sc Medical'  checked={selectedCourse === 'F.Sc Medical'} onChange={handleCourseChange}/>
                                             <span className=' text-red-600 text-xl font-bold'>F.Sc Medical</span>
                                         </label>
                                     </div>
                                     <div className="flex px-2">
                                         <label className="flex items-center space-x-2" htmlFor="ICSPhysics">
-                                            <input type="radio" id="ICS" name="course" />
+                                            <input type="radio" id="ICS" name="course" value='ICS (Physics)'  checked={selectedCourse === 'ICS (Physics)'}  onChange={handleCourseChange}/>
                                             <span className=' text-red-600 text-xl font-bold'>ICS (Physics)</span>
                                         </label>
                                     </div>
@@ -57,19 +76,19 @@ export default function Page() {
                                 <div className="flex justify-between">
                                     <div className="flex px-2">
                                         <label className="flex items-center space-x-2" htmlFor="ICSStatistics">
-                                            <input type="radio" id="ICS" name="course" />
+                                            <input type="radio" id="ICS" name="course" value='ICS (Statistics)'  checked={selectedCourse === 'ICS (Statistics)'} onChange={handleCourseChange} />
                                             <span className=' text-red-600 text-xl font-bold'>ICS (Statistics)</span>
                                         </label>
                                     </div>
                                     <div className="flex px-2">
                                         <label className="flex items-center space-x-2" htmlFor="ICom">
-                                            <input type="radio" id="ICS" name="course" />
+                                            <input type="radio" id="ICS" name="course" value='I.Com'  checked={selectedCourse === 'I.Com'} onChange={handleCourseChange} />
                                             <span className=' text-red-600 text-xl font-bold'>I.Com</span>
                                         </label>
                                     </div>
                                     <div className="flex px-2">
                                         <label className="flex items-center space-x-2" htmlFor="FAIT">
-                                            <input type="radio" id="ICS" name="course" />
+                                            <input type="radio" id="ICS" name="course" value='>F.A(IT)'  checked={selectedCourse === '>F.A(IT)'} onChange={handleCourseChange} />
                                             <span className=' text-red-600 text-xl font-bold'>F.A(IT)</span>
                                         </label>
                                     </div>
@@ -81,25 +100,25 @@ export default function Page() {
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="Regular">
                                             <span className=' text-red-600 text-xl font-bold'>Regular</span>
-                                            <input type="radio" id="Regular" name="class" />
+                                            <input type="radio" id="Regular" name="class" value='Regular'  checked={admissionType === 'Regular'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="Re-Admission">
                                             <span className=' text-red-600 text-xl font-bold'>Re-Admission</span>
-                                            <input type="radio" id="Regular" name="class" />
+                                            <input type="radio" id="Re-Admission" name="class" value='Re-Admission'  checked={admissionType === 'Re-Admission'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="OnlyCoaching">
                                             <span className=' text-red-600 text-xl font-bold'>Only Coaching</span>
-                                            <input type="radio" id="Regular" name="class" />
+                                            <input type="radio" id="Only Coaching" name="class" value='Only Coaching'  checked={admissionType === 'Only Coaching'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="SummerChamp">
                                             <span className=' text-red-600 text-xl font-bold'>Summer Champ</span>
-                                            <input type="radio" id="Regular" name="class" />
+                                            <input type="radio" id="Summer Champ" name="class" value='Summer Champ'  checked={admissionType === 'Summer Champ'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                 </div>
@@ -120,12 +139,15 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="" id="" placeholder="Enter your Name" /> </div>
+                                        <div className="">Name : <input type="text" name="" id="" placeholder="Enter your Name" required /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" /></div>
+                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$'
+                                            title='Type CNIC Like 03300000000'
+                                            required
+                                              /></div>
                                     </td>
 
                                 </tr>
@@ -144,16 +166,16 @@ export default function Page() {
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input className='px-2' type="text" name="" id="" placeholder="Enter your Phone Number" /></div>
+                                        <div className=""> <input className='px-2' type="text" name="" id="" placeholder="Enter your Phone Number"  pattern='^[0-9]{11}$' required/></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Mark of Identification <input className='px-2' type="text" name="" id="" placeholder="Mark of Identification" /> </div>
+                                        <div className="">Mark of Identification <input className='px-2' type="text" name="" id="" placeholder="Mark of Identification" required /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Date of Birth:<input className='px-2' type="date" name="" id="" placeholder="Enter your Date of Birth" /> </div>
+                                        <div className="">Date of Birth:<input className='px-2' type="date" name="" id="" placeholder="Enter your Date of Birth" required /> </div>
                                     </td>
 
                                 </tr>
@@ -174,12 +196,12 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="" id="" placeholder="Enter your Name" /> </div>
+                                        <div className="">Name : <input type="text" name="" id="" placeholder="Enter your Name" required /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" /></div>
+                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' /></div>
                                     </td>
 
                                 </tr>
@@ -197,22 +219,22 @@ export default function Page() {
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" /></div>
+                                        <div className=""> <input type="text" name="" id="" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$'/></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Occupation : <input type="text" name="" id="" placeholder="Occupation" /> </div>
+                                        <div className="">Occupation : <input type="text" name="" id="" placeholder="Occupation" required /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Religion<input type="text" name="" id="" placeholder="Religion" /> </div>
+                                        <div className="">Religion<input type="text" name="" id="" placeholder="Religion" required /> </div>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="" id="" placeholder="Enter your home address " />  </td>
-                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="" id="" placeholder="Enter your Email address " /></td>
+                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="" id="" placeholder="Enter your home address " required />  </td>
+                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="" id="" placeholder="Enter your Email address " required /></td>
 
                                 </tr>
 
@@ -239,19 +261,19 @@ export default function Page() {
                                 </tr>
                                 <tr >
                                     <td className='border-black border text-left font-bold ' >Matriculation</td>
-                                    <td className='border-black border text-left '> <input type="text" name="" id="" /> </td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                    <td className='border-black border text-left '> <input type="text" name="" id="" required /> </td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left font-bold '>Others</td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
-                                    <td className='border-black border text-left '><input type="text" name="" id="" /></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="" id="" required/></td>
                                 </tr>
                             </table>
 
@@ -327,7 +349,7 @@ export default function Page() {
                     <div className="flex p-5 justify-center items-center">
                         <button
                             className="bg-red-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
+                            type="submit" onClick={handleSubmit}
                         >
                             Submit
                         </button>
