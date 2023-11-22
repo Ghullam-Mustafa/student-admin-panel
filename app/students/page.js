@@ -3,108 +3,114 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc, query, where } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
 export default function Page() {
-  const [student, setStudent] = useState([]);
-  const [name, setName] = useState("");
-  const [studentId, setStudentId] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [student, setStudents] = useState([]);
+  // const [name, setName] = useState("");
+  // const [studentId, setStudentId] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  // const [selectedItem, setSelectedItem] = useState(null);
+  // const [loading, setLoading] = useState(false);
 
-  const handleDelete = async (id) => {
-    console.log(`Deleting item with ID ${id}`);
-    await deleteDoc(doc(db, "students", id));
-    fetchDocs(); // Refresh the list after deletion
-  };
+  // const handleDelete = async (id) => {
+  //   console.log(`Deleting item with ID ${id}`);
+  //   await deleteDoc(doc(db, "students", id));
+  //   fetchDocs(); // Refresh the list after deletion
+  // };
 
-  const openModal = (item) => {
-    setSelectedItem(item);
-    setName(item.name || "");
-    setStudentId(item.studentId || "");
-    setEmail(item.email || "");
-    setPhoneNumber(item.phoneNumber || "");
-  };
+  // const openModal = (item) => {
+  //   setSelectedItem(item);
+  //   setName(item.name || "");
+  //   setStudentId(item.studentId || "");
+  //   setEmail(item.email || "");
+  //   setPhoneNumber(item.phoneNumber || "");
+  // };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
+  // const handleUpdate = async (e) => {
+  //   e.preventDefault();
 
+  //   try {
+  //     if (!selectedItem) {
+  //       return;
+  //     }
+
+  //     const docRef = doc(db, "students", selectedItem.id);
+
+  //     await updateDoc(docRef, {
+  //       name,
+  //       studentId,
+  //       email,
+  //       phoneNumber,
+  //     });
+
+  //     closeModal(); // Close the modal and clear selected item
+  //     fetchDocs(); // Fetch updated data
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  const fetchData = async () => {
     try {
-      if (!selectedItem) {
-        return;
-      }
-
-      const docRef = doc(db, "students", selectedItem.id);
-
-      await updateDoc(docRef, {
-        name,
-        studentId,
-        email,
-        phoneNumber,
-      });
-
-      closeModal(); // Close the modal and clear selected item
-      fetchDocs(); // Fetch updated data
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchDocs = async () => {
-    try {
-      setLoading(true)
-      const collectionName = collection(db, "students");
-      const docs = await getDocs(collectionName);
+      // setLoading(true);
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'F.Sc Medical'));
+      const docs = await getDocs(q);
       const studentData = [];
       docs.forEach((doc) => {
         studentData.push({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
+          selectedCourse: "F.Sc Medical",
         });
       });
-      setStudent(studentData);
+      console.log("studentData", studentData);
+      setStudents(studentData);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
-      setLoading(false)
+      console.error(
+        'fifm'
+      );
+
     }
   };
 
   useEffect(() => {
-    fetchDocs();
+    fetchData();
   }, []);
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    const students = {
-      name,
-      studentId,
-      email,
-      phoneNumber
-    };
+  // const onSubmitHandler = async (e) => {
+  //   e.preventDefault();
+  //   const students = {
+  //     name,
+  //     studentId,
+  //     email,
+  //     phoneNumber
+  //   };
 
-    try {
-      const collectionName = collection(db, "students");
-      await addDoc(collectionName, students);
-      console.log("Code is working");
-      fetchDocs(); // Refresh the list after adding a new student
-    } catch (e) {
-      console.error("This code has an error ", e);
-    }
-  };
+  //   try {
+  //     const collectionName = collection(db, "students");
+  //     await addDoc(collectionName, students);
+  //     console.log("Code is working");
+  //     fetchDocs(); // Refresh the list after adding a new student
+  //   } catch (e) {
+  //     console.error("This code has an error ", e);
+  //   }
+  // };
 
-  const closeModal = () => {
-    setSelectedItem(null);
-  };
+  // const closeModal = () => {
+  //   setSelectedItem(null);
+  // };
 
   return (
     <>
-      <div className="grid place-content-center py-10">
+      {/* <div className="grid place-content-center py-10">
         <form className="w-full max-w-md text-center" onSubmit={onSubmitHandler}>
           <div className="md:flex md:items-center mb-6">
             <div className="md:w-1/3">
@@ -186,9 +192,8 @@ export default function Page() {
             </div>
           </div>
         </form>
-      </div>
-
-      <div className="overflow-x-auto">
+      </div> */}
+      {/* <div className="overflow-x-auto">
         <table className="min-w-full">
           <thead>
             <tr>
@@ -233,9 +238,21 @@ export default function Page() {
             )))}
           </tbody>
         </table>
-      </div>
+      </div> */}
+      {student?.map((item) => {
+        return <>
+          <div className="">
+            <div className=" w-10">
+              <img src={item.projectImage} alt="" />
+            </div>
+            <div>
+              {item.fatherName}
+            </div>
+          </div>
+        </>
 
-      {selectedItem && (
+      })}
+      {/* {selectedItem && (
         <div className="fixed inset-0 flex items-center justify-center modal-overlay">
           <div className="fixed inset-0 bg-black opacity-50"></div>
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -345,7 +362,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 }
