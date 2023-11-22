@@ -6,8 +6,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { PiPhoneCallBold } from 'react-icons/pi';
 import { FaWhatsapp } from "react-icons/fa6";
-import { db } from '@/config/firebase';
-import { addDoc, collection, getDocs,  } from 'firebase/firestore';
+import { db, storage } from '@/config/firebase';
+import { addDoc, collection, getDocs, snapshotEqual, } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage'
+
+
 export default function Page() {
 
     const [form, setForm] = useState([]);
@@ -37,10 +40,30 @@ export default function Page() {
     const [OtherObtainedMarks, setOtherObtainedMarks] = useState('');
     const [othetTotalMarks, setOtherTotalMarks] = useState('');
     const [otherInsitute, setOthertinsitute] = useState('');
+    const [studentImage, setStudentImage] = useState(null);
+    const [progress, setProgress] = useState(0)
 
+    const handleImageChange = (e) => {
+        setStudentImage(e.target.files[0]);
+    };
 
+    const uploadFile = (file) => {
+        if (!file) return;
+        const storageRef = ref(storage, `/files/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-    
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+            const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setProgress(prog);
+        },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url))
+            })
+    }
+
 
     const handleCourseChange = (event) => {
         setSelectedCourse(event.target.value);
@@ -53,65 +76,70 @@ export default function Page() {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
         const AddmissionForm = {
-          selectedCourse,
-          admissionType,
-          studentName,
-          studentphoneNumber,
-          studentCnic,
-          studentWhatsappNumber,
-          markOfIdentification,
-          dateOfBirth,
-          fatherName,
-          fatherPhoneNumber,
-          fatherCnic,
-          fatherWhatsappNumber,
-          fatherOccupation,
-          Religion,
-          homeAddress,
-          studentEmail,
-          matriculationYear,
-          boardRollNo,
-          obtainedMarks,
-          totalMarks,
-          insitute,
-          otherYear,
-          otherRollNo,
-          OtherObtainedMarks,
-          othetTotalMarks,
-          otherInsitute
+            selectedCourse,
+            admissionType,
+            studentName,
+            studentphoneNumber,
+            studentCnic,
+            studentWhatsappNumber,
+            markOfIdentification,
+            dateOfBirth,
+            fatherName,
+            fatherPhoneNumber,
+            fatherCnic,
+            fatherWhatsappNumber,
+            fatherOccupation,
+            Religion,
+            homeAddress,
+            studentEmail,
+            matriculationYear,
+            boardRollNo,
+            obtainedMarks,
+            totalMarks,
+            insitute,
+            otherYear,
+            otherRollNo,
+            OtherObtainedMarks,
+            othetTotalMarks,
+            otherInsitute
         };
-    
+
         try {
-          const collectionName = collection(db, "AddmissionForm");
-          await addDoc(collectionName, AddmissionForm);
-          console.log("Code is working");
-          fetchDocs(); // Refresh the list after adding a new student
-        } catch (e) {
-          console.error("This code has an error ", e);
-        }
-      };
-
-
-
-      const fetchDocs = async () => {
-        try {
-          setLoading(true)
-          const collectionName = collection(db, "Forms");
-          const docs = await getDocs(collectionName);
-          const studentData = [];
-          docs.forEach((doc) => {
-            studentData.push({
-              id: doc.id,
-              ...doc.data()
-            });
-          });
-          setStudent(studentData);
+            if (studentImage) {
+                await uploadFile(studentImage);
+            }
+            const collectionName = collection(db, "AddmissionForm");
+            await addDoc(collectionName, AddmissionForm);
+            console.log("Code is working");
+            fetchDocs();
         } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false)
+            console.error("Error submitting form: ", error);
         }
-      };
+
+        
+    };
+
+
+    const fetchDocs = async () => {
+        try {
+            // Assuming setLoading is a state variable that is declared
+            setLoading(true);
+            const collectionName = collection(db, "Forms");
+            const docs = await getDocs(collectionName);
+            const studentData = [];
+            docs.forEach((doc) => {
+                studentData.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
+            });
+            setStudent(studentData);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            // setLoading(false);
+        }
+    };
 
     const handleSubmit = () => {
         // Access the selected course value (stored in selectedCourse state)
@@ -127,7 +155,7 @@ export default function Page() {
         <>
             <div className='bg-white border-2 border-black p-2'>
 
-                <form   onSubmit={onSubmitHandler} >
+                <form onSubmit={onSubmitHandler} >
                     <div className="grid grid-cols-12">
                         <div className="col-span-3">
                             <Image src="/logo.png" alt="graph" height={50} width={100} />
@@ -145,47 +173,48 @@ export default function Page() {
                     <div className="grid grid-cols-12">
                         <div className="flex col-span-9 items-center">
                             <div className="">
-                                <div className="flex justify-between">
-                                    <div className="flex px-2">
+                                <div className="grid gap-x- gap-y-4 grid-cols-3">
+                                    <div className="flex ">
                                         <label className="flex items-center space-x-2" htmlFor="FScPreEngineering">
-                                            <input type="radio" id="ICS" name="course" value='F.Sc Pre-Engineering'  checked={selectedCourse === 'F.Sc Pre-Engineering'} onChange={handleCourseChange} />
-                                            <span className=' text-red-600 text-xl font-bold'>F.Sc Pre-Engineering</span>
+                                            <input type="radio" id="ICS" name="course" value='F.Sc Pre-Engineering' checked={selectedCourse === 'F.Sc Pre-Engineering'} onChange={handleCourseChange} />
+                                            <span className=' text-red-600 text-xl text-left font-bold'>F.Sc Pre-Engineering</span>
                                         </label>
                                     </div>
-                                    <div className="flex px-2">
+                                    <div className="flex ">
                                         <label className="flex items-center space-x-2" htmlFor="FScMedical">
-                                            <input type="radio" id="ICS" name="course" value='F.Sc Medical'  checked={selectedCourse === 'F.Sc Medical'} onChange={handleCourseChange}/>
-                                            <span className=' text-red-600 text-xl font-bold'>F.Sc Medical</span>
+                                            <input type="radio" id="ICS" name="course" value='F.Sc Medical' checked={selectedCourse === 'F.Sc Medical'} onChange={handleCourseChange} />
+                                            <span className=' text-red-600 text-xl text-left font-bold'>F.Sc Medical</span>
                                         </label>
                                     </div>
-                                    <div className="flex px-2">
+                                    <div className="flex ">
                                         <label className="flex items-center space-x-2" htmlFor="ICSPhysics">
-                                            <input type="radio" id="ICS" name="course" value='ICS (Physics)'  checked={selectedCourse === 'ICS (Physics)'}  onChange={handleCourseChange}/>
-                                            <span className=' text-red-600 text-xl font-bold'>ICS (Physics)</span>
+                                            <input type="radio" id="ICS" name="course" value='ICS (Physics)' checked={selectedCourse === 'ICS (Physics)'} onChange={handleCourseChange} />
+                                            <span className=' text-red-600 text-xl font-bold text-left'>ICS (Physics)</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <div className="flex justify-between">
-                                    <div className="flex px-2">
-                                        <label className="flex items-center space-x-2" htmlFor="ICSStatistics">
-                                            <input type="radio" id="ICS" name="course" value='ICS (Statistics)'  checked={selectedCourse === 'ICS (Statistics)'} onChange={handleCourseChange} />
-                                            <span className=' text-red-600 text-xl font-bold'>ICS (Statistics)</span>
+                                <div className="grid gap-x- gap-y-4 grid-cols-3">
+                                    <div className="flex text-left">
+                                        <label className="flex  space-x-2" htmlFor="ICSStatistics">
+                                            <input type="radio" id="ICS" name="course" value='ICS (Statistics)' checked={selectedCourse === 'ICS (Statistics)'} onChange={handleCourseChange} />
+                                            <span className='text-red-600 text-xl text-left font-bold'>ICS (Statistics)</span>
                                         </label>
                                     </div>
-                                    <div className="flex px-2">
-                                        <label className="flex items-center space-x-2" htmlFor="ICom">
-                                            <input type="radio" id="ICS" name="course" value='I.Com'  checked={selectedCourse === 'I.Com'} onChange={handleCourseChange} />
-                                            <span className=' text-red-600 text-xl font-bold'>I.Com</span>
+                                    <div className="flex  text-left">
+                                        <label className="flex  space-x-2" htmlFor="ICom">
+                                            <input type="radio" id="ICS" name="course" value='I.Com' checked={selectedCourse === 'I.Com'} onChange={handleCourseChange} />
+                                            <span className='text-red-600 text-xl font-bold'>I.Com</span>
                                         </label>
                                     </div>
-                                    <div className="flex px-2">
-                                        <label className="flex items-center space-x-2" htmlFor="FAIT">
-                                            <input type="radio" id="ICS" name="course" value='>F.A(IT)'  checked={selectedCourse === '>F.A(IT)'} onChange={handleCourseChange} />
-                                            <span className=' text-red-600 text-xl font-bold'>F.A(IT)</span>
+                                    <div className="flex  p- text-left">
+                                        <label className="flex  space-x-2" htmlFor="FAIT">
+                                            <input type="radio" id="ICS" name="course" value='F.A(IT)' checked={selectedCourse === 'F.A(IT)'} onChange={handleCourseChange} />
+                                            <span className='text-red-600 text-xl font-bold'>F.A(IT)</span>
                                         </label>
                                     </div>
                                 </div>
+
 
                                 <p>Applicant should fill this form carefully in his/her own handwriting, get it countersigned by his/her father/guardian, and attach attested copies of certificates (non-returnable in any case), as evidence of the following particulars before submitting to the college office.</p>
 
@@ -193,25 +222,26 @@ export default function Page() {
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="Regular">
                                             <span className=' text-red-600 text-xl font-bold'>Regular</span>
-                                            <input type="radio" id="Regular" name="class" value='Regular'  checked={admissionType === 'Regular'} onChange={handleAdmissionType} />
+                                            <input type="radio" id="Regular" name="class" value='Regular' checked={admissionType === 'Regular'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="Re-Admission">
                                             <span className=' text-red-600 text-xl font-bold'>Re-Admission</span>
-                                            <input type="radio" id="Re-Admission" name="class" value='Re-Admission'  checked={admissionType === 'Re-Admission'} onChange={handleAdmissionType} />
+                                            <input type="radio" id="Re-Admission" name="class" value='Re-Admission' checked={admissionType === 'Re-Admission'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="OnlyCoaching">
                                             <span className=' text-red-600 text-xl font-bold'>Only Coaching</span>
-                                            <input type="radio" id="Only Coaching" name="class" value='Only Coaching'  checked={admissionType === 'Only Coaching'} onChange={handleAdmissionType} />
+                                            <input type="radio" id="Only Coaching" name="class" value='Only Coaching' checked={admissionType === 'Only Coaching'} onChange={handleAdmissionType} />
                                         </label>
                                     </div>
                                     <div className="flex px-3">
                                         <label className="flex items-center space-x-2" htmlFor="SummerChamp">
-                                            <span className=' text-red-600 text-xl font-bold'>Summer Champ</span>
-                                            <input type="radio" id="Summer Champ" name="class" value='Summer Champ'  checked={admissionType === 'Summer Champ'} onChange={handleAdmissionType} />
+                                            <span className=' text-red-600 text-xl font-bold'>Summer Camp</span>
+                                            <input type="radio" id="Summer Champ" name="class" value='Summer Champ' checked={admissionType === 'Summer Champ'} onChange={handleAdmissionType} />
+
                                         </label>
                                     </div>
                                 </div>
@@ -221,8 +251,9 @@ export default function Page() {
                         <div className="col-span-3">
                             <label>
                                 Upload Image:
-                                <input type="file" />
+                                <input type="file" className='input' accept='image.png' onChange={(e) => setStudentPhoneNumber(e.target.files)} />
                             </label>
+                            <h3>Uploaded {progress}%</h3>
                         </div>
                     </div>
                     <div className=" py-6">
@@ -232,46 +263,46 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="studentName" id="studentName"  placeholder="Enter your Name" value={studentName} onChange={(e)=> setStudentName(e.target.value)} required /> </div>
+                                        <div className="">Name : <input type="text" name="studentName" id="studentName" placeholder="Enter your Name" value={studentName} onChange={(e) => setStudentName(e.target.value)} required /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="studentphoneNumber" id="studentphoneNumber" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$' value={studentphoneNumber} onChange={(e)=> setStudentPhoneNumber(e.target.value)}
+                                        <div className=""> <input type="text" name="studentphoneNumber" id="studentphoneNumber" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$' value={studentphoneNumber} onChange={(e) => setStudentPhoneNumber(e.target.value)}
                                             title='Type CNIC Like 03300000000'
                                             required
-                                              /></div>
+                                        /></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
                                     <td className='border-black border text-left px-8'>
-                                        C.N.I.C. / B-form No
+                                        C.N.I.C. / B-form No:
                                         <input
                                             className='px-2'
                                             type='text'
                                             pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'
                                             title='Type CNIC Like 12345-1234567-1'
                                             required
-                                            placeholder='(331000-0000000-0)'
+                                            placeholder='(33100-0000000-0)'
                                             id='studentCnic'
                                             value={studentCnic}
-                                            onChange={(e)=> setStudentCnic(e.target.value)}
+                                            onChange={(e) => setStudentCnic(e.target.value)}
                                         />
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input className='px-2' type="text" name="studentWhatsappNumber" id="studentWhatsappNumber" placeholder="Enter your Phone Number"  pattern='^[0-9]{11}$' required value={studentWhatsappNumber}  onChange={(e)=> setStudentWhatsappNumber(e.target.value)}/></div>
+                                        <div className=""> <input className='px-2' type="text" name="studentWhatsappNumber" id="studentWhatsappNumber" placeholder="Enter your Phone Number" pattern='^[0-9]{11}$' required value={studentWhatsappNumber} onChange={(e) => setStudentWhatsappNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Mark of Identification <input className='px-2' type="text" name="markOfIdentification" id="markOfIdentification"  placeholder="Mark of Identification" required value={markOfIdentification}  onChange={(e)=> setMarkOfIdentification(e.target.value)} /> </div>
+                                        <div className="">Mark of Identification: <input className='px-2' type="text" name="markOfIdentification" id="markOfIdentification" placeholder="Mark of Identification" required value={markOfIdentification} onChange={(e) => setMarkOfIdentification(e.target.value)} /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Date of Birth:<input className='px-2' type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Enter your Date of Birth" required value={dateOfBirth}  onChange={(e)=> setDateOfBirth(e.target.value)} /> </div>
+                                        <div className="">Date of Birth:<input className='px-2' type="date" name="dateOfBirth" id="dateOfBirth" placeholder="Enter your Date of Birth" required value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} /> </div>
                                     </td>
 
                                 </tr>
@@ -292,50 +323,50 @@ export default function Page() {
 
                                 <tr>
                                     <td className='border-black border text-left px-8 '>
-                                        <div className="">Name : <input type="text" name="fatherName" id="fatherName" placeholder="Enter your Father Name" required value={fatherName} onChange={(e)=> setFatherName(e.target.value)} /> </div>
+                                        <div className="">Name : <input type="text" name="fatherName" id="fatherName" placeholder="Enter your Father Name" required value={fatherName} onChange={(e) => setFatherName(e.target.value)} /> </div>
 
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <PiPhoneCallBold />    </div>
-                                        <div className=""> <input type="text" name="fatherPhoneNumber" id="fatherPhoneNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherPhoneNumber} onChange={(e)=> setFatherPhoneNumber(e.target.value)} /></div>
+                                        <div className=""> <input type="text" name="fatherPhoneNumber" id="fatherPhoneNumber" placeholder="Enter your Phone Number" required pattern='^[0-9]{11}$' value={fatherPhoneNumber} onChange={(e) => setFatherPhoneNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
                                     <td className='border-black border text-left px-8'>
-                                        C.N.I.C. / B-form No
+                                        C.N.I.C. / B-form No:
                                         <input
                                             type='text'
                                             pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'
                                             title='Type CNIC Like 12345-1234567-1'
                                             required
-                                            placeholder='(331000-0000000-0)'
+                                            placeholder='(33100-0000000-0)'
                                             id='fatherCnic'
                                             name='fatherCnic'
                                             value={fatherCnic}
-                                            onChange={(e)=>setFahterCnic(e.target.value)}
+                                            onChange={(e) => setFahterCnic(e.target.value)}
 
                                         />
                                     </td>
                                     <td className='border-black border text-left px-8 flex'>
                                         <div className=" justify-center items-center "> <FaWhatsapp />    </div>
-                                        <div className=""> <input type="text" name="fatherWhatsappNumber" id="fatherWhatsappNumber" placeholder="Enter your Phone Number" required  pattern='^[0-9]{11}$' value={fatherWhatsappNumber} onChange={(e)=> setFatherWhatsappNumber(e.target.value)} /></div>
+                                        <div className=""> <input type="text" name="fatherWhatsappNumber" id="fatherWhatsappNumber" placeholder="Enter your Phone Number" required pattern='^[0-9]{11}$' value={fatherWhatsappNumber} onChange={(e) => setFatherWhatsappNumber(e.target.value)} /></div>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Occupation : <input type="text" name="fatherOccupation" id="fatherOccupation" placeholder="Occupation" required value={fatherOccupation} onChange={(e)=> setFatherOccupation(e.target.value)} /> </div>
+                                        <div className="">Occupation : <input type="text" name="fatherOccupation" id="fatherOccupation" placeholder="Occupation" required value={fatherOccupation} onChange={(e) => setFatherOccupation(e.target.value)} /> </div>
                                     </td>
                                     <td className='border-black border text-left px-8'>
-                                        <div className="">Religion<input type="text" name="Religion" id="Religion" placeholder="Religion" required value={Religion} onChange={(e)=> setReligion(e.target.value)} /> </div>
+                                        <div className="">Religion:<input type="text" name="Religion" id="Religion" placeholder="Religion" required value={Religion} onChange={(e) => setReligion(e.target.value)} /> </div>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="homeAddress" id="homeAddress" placeholder="Enter your home address " required value={homeAddress} onChange={(e)=> setHomeAddress(e.target.value)} />  </td>
-                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="studentEmail" id="studentEmail" placeholder="Enter your Email address " required value={studentEmail}  onChange={(e)=> setStudentEmail(e.target.value)} /></td>
+                                    <td className='border-black border text-left px-8'>Home Address: <input type="text" name="homeAddress" id="homeAddress" placeholder="Enter your home address " required value={homeAddress} onChange={(e) => setHomeAddress(e.target.value)} />  </td>
+                                    <td className='border-black border text-left px-8'>Email :<input type="text" name="studentEmail" id="studentEmail" placeholder="Enter your Email address " required value={studentEmail} onChange={(e) => setStudentEmail(e.target.value)} /></td>
 
                                 </tr>
 
@@ -362,19 +393,19 @@ export default function Page() {
                                 </tr>
                                 <tr >
                                     <td className='border-black border text-left font-bold ' >Matriculation</td>
-                                    <td className='border-black border text-left '> <input type="text" name="matriculationYear" id="matriculationYear" value={matriculationYear} onChange={(e)=> setMatriculationYear(e.target.value)} required /> </td>
-                                    <td className='border-black border text-left '><input type="text" name="boardRollNo" id="boardRollNo" value={boardRollNo} onChange={(e)=> setBoardRollNo(e.target.value)} required /></td>
-                                    <td className='border-black border text-left '><input type="text" name="obtainedMarks" id="obtainedMarks" value={obtainedMarks} onChange={(e)=> setObtainedMarks(e.target.value)} required /></td>
-                                    <td className='border-black border text-left '><input type="text" name="totalMarks" id="totalMarks" value={totalMarks} onChange={(e)=> setTotalMarks(e.target.value)} required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="insitute" id="insitute" value={insitute} onChange={(e)=> setinsitute(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '> <input type="text" name="matriculationYear" id="matriculationYear" value={matriculationYear} onChange={(e) => setMatriculationYear(e.target.value)} required /> </td>
+                                    <td className='border-black border text-left '><input type="text" name="boardRollNo" id="boardRollNo" value={boardRollNo} onChange={(e) => setBoardRollNo(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="obtainedMarks" id="obtainedMarks" value={obtainedMarks} onChange={(e) => setObtainedMarks(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="totalMarks" id="totalMarks" value={totalMarks} onChange={(e) => setTotalMarks(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="insitute" id="insitute" value={insitute} onChange={(e) => setinsitute(e.target.value)} required /></td>
                                 </tr>
                                 <tr>
                                     <td className='border-black border text-left font-bold '>Others</td>
-                                    <td className='border-black border text-left '><input type="text" name="otherYear" id="otherYear"  value={otherYear} onChange={(e)=> setOtherYear(e.target.value)} required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="otherRollNo" id="otherRollNo" value={otherRollNo} onChange={(e)=> setOtherRollNo(e.target.value)} required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="OtherObtainedMarks" id="OtherObtainedMarks" value={OtherObtainedMarks} onChange={(e)=> setOtherObtainedMarks(e.target.value)} required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="othetTotalMarks" id="othetTotalMarks" value={othetTotalMarks} onChange={(e)=> setOtherTotalMarks(e.target.value)} required/></td>
-                                    <td className='border-black border text-left '><input type="text" name="otherInsitute" id="otherInsitute" value={otherInsitute}  onChange={(e)=> setOthertinsitute(e.target.value)} required/></td>
+                                    <td className='border-black border text-left '><input type="text" name="otherYear" id="otherYear" value={otherYear} onChange={(e) => setOtherYear(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="otherRollNo" id="otherRollNo" value={otherRollNo} onChange={(e) => setOtherRollNo(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="OtherObtainedMarks" id="OtherObtainedMarks" value={OtherObtainedMarks} onChange={(e) => setOtherObtainedMarks(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="othetTotalMarks" id="othetTotalMarks" value={othetTotalMarks} onChange={(e) => setOtherTotalMarks(e.target.value)} required /></td>
+                                    <td className='border-black border text-left '><input type="text" name="otherInsitute" id="otherInsitute" value={otherInsitute} onChange={(e) => setOthertinsitute(e.target.value)} required /></td>
                                 </tr>
                             </table>
 

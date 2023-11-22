@@ -15,8 +15,8 @@ const SideBar = forwardRef(({ showNav }, ref) => {
       <div className="flex justify-center mt-6 mb-14">
         <picture className="pt-5">
           <img
-            className="w-50 h-auto"
-            src="/OIMZ3J0.jpg"
+            className="w-32 "
+            src="/logo.png"
             alt="company logo"
           />
         </picture>
