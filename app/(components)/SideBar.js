@@ -62,15 +62,15 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
           >
-            <div className="mr-2">
+            <div className="my-2">
               <FcOvertime className="text-2xl" />
             </div>
             <div>
-              <p>F.Sc Pre-Engineeering</p>
+              <p>F.Sc Pre-Engineering</p>
             </div>
           </div>
         </Link>
-        <Link href="/courses">
+        <Link href="/icsPhysics">
           <div
             className={`pl-6 py-3 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
              mb-3 flex items-center transition-colors ${router.pathname == "/billing"
@@ -82,7 +82,8 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               <ImBooks className="text-2xl" />
             </div>
             <div>
-              <p>Courses</p>
+              <p>ICS (Physics)
+</p>
             </div>
           </div>
         </Link>
