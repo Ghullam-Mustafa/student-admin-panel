@@ -83,7 +83,24 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
             <div>
               <p>ICS (Physics)
-</p>
+              </p>
+            </div>
+          </div>
+        </Link>
+        <Link href="/icsStatistic">
+          <div
+            className={`pl-6 py-3 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
+             mb-3 flex items-center transition-colors ${router.pathname == "/billing"
+                ? "bg-orange-100 text-[#9697DB]"
+                : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
+              }`}
+          >
+            <div className="mr-2">
+              <ImBooks className="text-2xl" />
+            </div>
+            <div>
+              <p>ICS (Statistic)
+              </p>
             </div>
           </div>
         </Link>
