@@ -12,8 +12,8 @@ const SideBar = forwardRef(({ showNav }, ref) => {
 
   return (
     <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm">
-      <div className="flex justify-center mt-6 mb-14">
-        <picture className="pt-5">
+      <div className="flex justify-center mt-6 mb-4">
+        <picture className="pt-4">
           <img
             className="w-32 "
             src="/logo.png"
@@ -25,7 +25,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
       <div className="flex flex-col">
         <Link href="/">
           <div
-            className={`pl-6 py-3 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
+            className={`pl-6 py-2 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
               ? "bg-orange-100 text-[#9697DB]"
               : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
@@ -41,7 +41,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         </Link>
         <Link href="/fscMedical">
           <div
-            className={`pl-6 py-3 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
+            className={`pl-6 py-2 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
               ? "bg-orange-100 text-[#9697DB]"
               : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
@@ -57,13 +57,13 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         </Link>
         <Link href="/fscPreEngineering" >
           <div
-            className={`pl-6 py-3 mx-5  text-center cursor-pointer hover:drop-shadow-2xl mb-3 rounded-full flex items-center transition-colors ${router.pathname == "/account"
+            className={`pl-6 py-2 mx-5  text-center cursor-pointer hover:drop-shadow-2xl mb-2 rounded-full flex items-center transition-colors ${router.pathname == "/account"
               ? "bg-orange-100 text-[#9697DB]"
               : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
           >
             <div className="my-2">
-              <FcOvertime className="text-2xl" />
+            <HiUserGroup className="text-2xl" />
             </div>
             <div>
               <p>F.Sc Pre-Engineering</p>
@@ -72,14 +72,14 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         </Link>
         <Link href="/icsPhysics">
           <div
-            className={`pl-6 py-3 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
+            className={`pl-6 py-2 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
              mb-3 flex items-center transition-colors ${router.pathname == "/billing"
                 ? "bg-orange-100 text-[#9697DB]"
                 : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
           >
             <div className="mr-2">
-              <ImBooks className="text-2xl" />
+            <HiUserGroup className="text-2xl" />
             </div>
             <div>
               <p>ICS (Physics)
@@ -89,14 +89,14 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         </Link>
         <Link href="/icsStatistic">
           <div
-            className={`pl-6 py-3 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
+            className={`pl-6 py-2 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
              mb-3 flex items-center transition-colors ${router.pathname == "/billing"
                 ? "bg-orange-100 text-[#9697DB]"
                 : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
           >
             <div className="mr-2">
-              <ImBooks className="text-2xl" />
+            <HiUserGroup className="text-2xl" />
             </div>
             <div>
               <p>ICS (Statistic)
@@ -106,14 +106,14 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         </Link>
         <Link href="/icom">
           <div
-            className={`pl-6 py-3 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
+            className={`pl-6 py-2 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
              mb-3 flex items-center transition-colors ${router.pathname == "/billing"
                 ? "bg-orange-100 text-[#9697DB]"
                 : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
           >
             <div className="mr-2">
-              <ImBooks className="text-2xl" />
+            <HiUserGroup className="text-2xl" />
             </div>
             <div>
               <p>I.Com
@@ -121,9 +121,26 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
+        <Link href="/faIt">
+          <div
+            className={`pl-6 py-2 mx-5 rounded-full text-center cursor-pointer hover:drop-shadow-2xl
+             mb-3 flex items-center transition-colors ${router.pathname == "/billing"
+                ? "bg-orange-100 text-[#9697DB]"
+                : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
+              }`}
+          >
+            <div className="mr-2">
+            <HiUserGroup className="text-2xl" />
+            </div>
+            <div>
+              <p>F.A(IT)
+              </p>
+            </div>
+          </div>
+        </Link>
         <Link href="/admissionFrom" >
           <div
-            className={`pl-6 py-3 mx-5  text-center cursor-pointer hover:drop-shadow-2xl mb-3 rounded-full flex items-center transition-colors ${router.pathname == "/account"
+            className={`pl-6 py-2 mx-5  text-center cursor-pointer hover:drop-shadow-2xl mb-2 rounded-full flex items-center transition-colors ${router.pathname == "/account"
               ? "bg-orange-100 text-[#9697DB]"
               : "text-gray-400 hover:bg-[#b8bae6] hover:text-[#7072da]"
               }`}
