@@ -46,32 +46,32 @@ export default function Page() {
 
     return (
         <>
-            <div className="">
-                {student?.map((item) => {
+            <div className=" grid grid-cols-2 gap-4">
+                {student?.map((item,i) => {
                     return <>
-                        <div className=" border-silver border-2 rounded-lg p-5">
-                            <div className=" items-center justify-center w-[20%]">
-                                <img src={item.projectImage} alt="" />
+                        <div key={i} className=" border-silver border-2 rounded-lg p-5">
+                            <div className="   w-[20%]">
+                                <img className=' items-center justify-center' src={item.projectImage} alt="" />
                             </div>
                             <div>
                                 <p className='text-lg font-bold'>Student Name : <span className='text-sm font-normal'>{item.studentName}</span> </p>
                                 <p className='text-lg font-bold'>Father Name : <span className='text-sm font-normal'> {item.fatherName}</span></p>
                                 <p className='text-lg font-bold'>Student Contact Number : <span className='text-sm font-normal'>{item.studentPhoneNumber}</span></p>
-                                <p className='text-lg font-bold'>Student WhatsApp Number :<span className='text-sm font-normal'>{item.studentWhatsappNumber}</span></p>
-                                <p className='text-lg font-bold'>Student Email :<span className='text-sm font-normal'>{item.studentEmail}</span></p>
-                                <p className='text-lg font-bold'>Student CNIC :<span className='text-sm font-normal'>{item.studentCnic}</span></p>
-                                <p className='text-lg font-bold'>Date Of Birth:<span className='text-sm font-normal'>{item.dateOfBirth}</span></p>
-                                <p className='text-lg font-bold'>Religion :<span className='text-sm font-normal'>{item.Religion}</span></p>
-                                <p className='text-lg font-bold'>Mark Of Identification:<span className='text-sm font-normal'>{item.markOfIdentification}</span></p>
-                                <p className='text-lg font-bold'>Home Address:<span className='text-sm font-normal'>{item.homeAddress}</span></p>
+                                <p className='text-lg font-bold'>Student WhatsApp Number : <span className='text-sm font-normal'>{item.studentWhatsappNumber}</span></p>
+                                <p className='text-lg font-bold'>Student Email : <span className='text-sm font-normal'>{item.studentEmail}</span></p>
+                                <p className='text-lg font-bold'>Student CNIC : <span className='text-sm font-normal'>{item.studentCnic}</span></p>
+                                <p className='text-lg font-bold'>Date Of Birth: <span className='text-sm font-normal'>{item.dateOfBirth}</span></p>
+                                <p className='text-lg font-bold'>Religion : <span className='text-sm font-normal'>{item.Religion}</span></p>
+                                <p className='text-lg font-bold'>Mark Of Identification: <span className='text-sm font-normal'>{item.markOfIdentification}</span></p>
+                                <p className='text-lg font-bold'>Home Address: <span className='text-sm font-normal'>{item.homeAddress}</span></p>
 
                                 <br />
                                 <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S PROFILE</p>
                                 <br />
-                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S C.N.I.C:<span className='text-sm font-normal'>{item.fatherCnic}</span></p>
-                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S phone number:<span className='text-sm font-normal'>{item.fatherPhoneNumber}</span></p>
-                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S whatsapp number:<span className='text-sm font-normal'>{item.fatherWhatsappNumber}</span></p>
-                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S Occupation:<span className='text-sm font-normal'>{item.fatherOccupation} </span></p>
+                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S C.N.I.C: <span className='text-sm font-normal'>{item.fatherCnic}</span></p>
+                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S phone number: <span className='text-sm font-normal'>{item.fatherPhoneNumber}</span></p>
+                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S whatsapp number: <span className='text-sm font-normal'>{item.fatherWhatsappNumber}</span></p>
+                                <p className='text-lg font-bold'>FATHER'S / GUARDIAN'S Occupation: <span className='text-sm font-normal'>{item.fatherOccupation} </span></p>
 
 
                                 <p className='text-lg font-bold'>EDUCATIONAL PROFILE</p>

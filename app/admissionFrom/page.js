@@ -798,7 +798,7 @@ export default function Page() {
                       id="otherYear"
                       value={otherYear}
                       onChange={(e) => setOtherYear(e.target.value)}
-                      required
+                      
                     />
                   </td>
                   <td className="border-black border text-left ">
@@ -808,7 +808,7 @@ export default function Page() {
                       id="otherRollNo"
                       value={otherRollNo}
                       onChange={(e) => setOtherRollNo(e.target.value)}
-                      required
+                     
                     />
                   </td>
                   <td className="border-black border text-left ">
@@ -818,7 +818,7 @@ export default function Page() {
                       id="OtherObtainedMarks"
                       value={OtherObtainedMarks}
                       onChange={(e) => setOtherObtainedMarks(e.target.value)}
-                      required
+                      
                     />
                   </td>
                   <td className="border-black border text-left ">
@@ -828,7 +828,7 @@ export default function Page() {
                       id="othetTotalMarks"
                       value={othetTotalMarks}
                       onChange={(e) => setOtherTotalMarks(e.target.value)}
-                      required
+                      
                     />
                   </td>
                   <td className="border-black border text-left ">
@@ -838,7 +838,7 @@ export default function Page() {
                       id="otherInsitute"
                       value={otherInsitute}
                       onChange={(e) => setOthertinsitute(e.target.value)}
-                      required
+                      
                     />
                   </td>
                 </tr>
