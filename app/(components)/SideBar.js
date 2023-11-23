@@ -55,7 +55,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/attendence" >
+        <Link href="/fscPreEngineering" >
           <div
             className={`pl-6 py-3 mx-5  text-center cursor-pointer hover:drop-shadow-2xl mb-3 rounded-full flex items-center transition-colors ${router.pathname == "/account"
               ? "bg-orange-100 text-[#9697DB]"
@@ -66,7 +66,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               <FcOvertime className="text-2xl" />
             </div>
             <div>
-              <p>Attendence</p>
+              <p>F.Sc Pre-Engineeering</p>
             </div>
           </div>
         </Link>
