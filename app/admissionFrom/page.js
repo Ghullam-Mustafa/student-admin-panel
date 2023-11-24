@@ -1,5 +1,6 @@
 "use client";
-
+import * as yup from 'yup'
+import { userSchema } from "@/validation/UserValidation";
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
@@ -43,6 +44,43 @@ export default function Page() {
   const [otherInsitute, setOthertinsitute] = useState("");
   const [file, setFile] = useState({});
   const [isUploading, setIsUploading] = useState(false)
+
+
+
+
+
+  
+  const [showCameraIcon, setShowCameraIcon] = useState(false);
+  const [imageSrc, setImageSrc] = useState (
+    "/assets/images/templates/cvprofile.png"
+  );
+
+  const handleHover = () => {
+    setShowCameraIcon(true);
+  };
+
+  const handleLeave = () => {
+    setShowCameraIcon(false);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        const result = event.target?.result ;
+        setImageSrc(result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+
+
+
 
   const handleCourseChange = (event) => {
     setSelectedCourse(event.target.value);
@@ -93,7 +131,7 @@ export default function Page() {
 
   // };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler =async (e) => {
     e.preventDefault();
 
     const AddmissionForm = {
@@ -125,6 +163,8 @@ export default function Page() {
       othetTotalMarks,
     };
 
+    const isValid = await userSchema.isValid(AddmissionForm)
+    console.log(isValid)
     if (!file.name) {
       alert("Please Select Image", "error");
 
@@ -193,6 +233,10 @@ export default function Page() {
       }
     );
 
+
+
+
+  
 
 
     const AddProjectData = async (AddmissionForm) => {
@@ -436,7 +480,7 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="col-span-3">
+              {/* <div className="col-span-3">
                 <div className=" border-black border w-[50%] h-[70%]  overflow-hidden">
                   <label>
                     Upload Image:
@@ -448,8 +492,44 @@ export default function Page() {
                       required
                     />
                   </label>
+                </div> */}
+
+                <div className="cursor-pointer overflow-hidden h-[104px]" onMouseEnter={handleHover} onMouseLeave={handleLeave}
+                  style={{ position: "relative", display: "inline-block" }}>
+                  <Image
+                    src={imageSrc}
+                    alt="profile"
+                    width={104}
+                    height={104}
+                    className="block rounded-full overflow-hidden  p-3  max-w-[104px] h-[104px]"
+                  />
+
+                  {showCameraIcon && (
+                    <label
+                      htmlFor="imageInput"
+                      className="absolute top-[50%] left-[50%] cursor-pointer"
+                      style={{
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <span
+                        role="img"
+                        aria-label="camera"
+                        style={{ fontSize: "24px" }}
+                      >
+                        📷
+                      </span>
+                    </label>
+                  )}
+
+                  <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={handleImageChange}
+                  />
                 </div>
-              </div>
             </div>
             <div className=" py-6">
               <p className=" text-red-600 text-2xl font-bold">
@@ -480,7 +560,7 @@ export default function Page() {
                       <div className="">
                         {" "}
                         <input
-                          type="text"
+                          type="number"
                           name="studentphoneNumber"
                           id="studentphoneNumber"
                           // placeholder="Enter your Phone Number"
@@ -499,7 +579,7 @@ export default function Page() {
                       C.N.I.C. / B-form No:
                       <input
                         className="px-2"
-                        type="text"
+                        type="number"
                         pattern="^[0-9]{5}-[0-9]{7}-[0-9]{1}$"
                         title="Type CNIC Like 12345-1234567-1"
                         required
@@ -518,7 +598,7 @@ export default function Page() {
                         {" "}
                         <input
                           className="px-2"
-                          type="text"
+                          type="number"
                           name="studentWhatsappNumber"
                           id="studentWhatsappNumber"
                           // placeholder="Enter your Phone Number"
@@ -599,7 +679,7 @@ export default function Page() {
                       <div className="">
                         {" "}
                         <input
-                          type="text"
+                          type="number"
                           name="fatherPhoneNumber"
                           id="fatherPhoneNumber"
                           // placeholder="Enter your Phone Number"
@@ -635,7 +715,9 @@ export default function Page() {
                       <div className="">
                         {" "}
                         <input
-                          type="text"
+                          className="bg-gray-200 appearance-none border-2  border-gray-200 rounded w-full  px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                          type="number"
+
                           name="fatherWhatsappNumber"
                           id="fatherWhatsappNumber"
                           // placeholder="Enter your Phone Number"
@@ -740,7 +822,7 @@ export default function Page() {
                     <td className="border-black border text-left ">
                       {" "}
                       <input
-                        type="text"
+                        type="number"
                         name="matriculationYear"
                         id="matriculationYear"
                         value={matriculationYear}
@@ -750,7 +832,7 @@ export default function Page() {
                     </td>
                     <td className="border-black border text-left ">
                       <input
-                        type="text"
+                        type="number"
                         name="boardRollNo"
                         id="boardRollNo"
                         value={boardRollNo}
@@ -760,7 +842,7 @@ export default function Page() {
                     </td>
                     <td className="border-black border text-left ">
                       <input
-                        type="text"
+                        type="number"
                         name="obtainedMarks"
                         id="obtainedMarks"
                         value={obtainedMarks}
@@ -770,7 +852,7 @@ export default function Page() {
                     </td>
                     <td className="border-black border text-left ">
                       <input
-                        type="text"
+                        type="number"
                         name="totalMarks"
                         id="totalMarks"
                         value={totalMarks}

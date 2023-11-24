@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react';
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc, query, where } from 'firebase/firestore';
 import { db } from '@/config/firebase';
-
+import DashboardNavbar from '../(components)/dashboardNavbar';
 
 export default function Page() {
     const [student, setStudents] = useState([]);
@@ -46,6 +46,7 @@ export default function Page() {
 
     return (
         <>
+            <DashboardNavbar/>
             <div className=" grid grid-cols-2 gap-4">
                 {student?.map((item,i) => {
                     return <>
