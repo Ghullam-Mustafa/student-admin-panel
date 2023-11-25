@@ -1,6 +1,6 @@
 "use client";
-import * as yup from 'yup'
-import { userSchema } from "@/validation/UserValidation";
+
+
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
@@ -49,10 +49,10 @@ export default function Page() {
 
 
 
-  
+
   const [showCameraIcon, setShowCameraIcon] = useState(false);
-  const [imageSrc, setImageSrc] = useState (
-    "/assets/images/templates/cvprofile.png"
+  const [imageSrc, setImageSrc] = useState(
+    "/cvprofile.jpg"
   );
 
   const handleHover = () => {
@@ -69,7 +69,7 @@ export default function Page() {
       const reader = new FileReader();
 
       reader.onload = (event) => {
-        const result = event.target?.result ;
+        const result = event.target?.result;
         setImageSrc(result);
       };
 
@@ -90,48 +90,9 @@ export default function Page() {
     setAdmissionType(event.target.value);
   };
 
-  // const onSubmitHandler = async (e) => {
-  //     e.preventDefault();
-  //     const AddmissionForm = {
-  //         selectedCourse,
-  //         admissionType,
-  //         studentName,
-  //         studentphoneNumber,
-  //         studentCnic,
-  //         studentWhatsappNumber,
-  //         markOfIdentification,
-  //         dateOfBirth,
-  //         fatherName,
-  //         fatherPhoneNumber,
-  //         fatherCnic,
-  //         fatherWhatsappNumber,
-  //         fatherOccupation,
-  //         Religion,
-  //         homeAddress,
-  //         studentEmail,
-  //         matriculationYear,
-  //         boardRollNo,
-  //         obtainedMarks,
-  //         totalMarks,
-  //         insitute,
-  //         otherYear,
-  //         otherRollNo,
-  //         OtherObtainedMarks,
-  //         othetTotalMarks,
-  //         otherInsitute
-  //     };
 
-  //     try {
-  //         const collectionName = collection(db, "AddmissionForm");
-  //         await addDoc(collectionName, AddmissionForm);
-  //         console.log("Code is working");
-  //     } catch (error) {
-  //         console.error("Error submitting form: ", error);
-  //     }
 
-  // };
-
-  const onSubmitHandler =async (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     const AddmissionForm = {
@@ -236,7 +197,7 @@ export default function Page() {
 
 
 
-  
+
 
 
     const AddProjectData = async (AddmissionForm) => {
@@ -259,7 +220,7 @@ export default function Page() {
     <>
 
       {isUploading ? <>
-        <div class="circle-container h-screen w-[100vh] flex justify-center items-center">
+        <div class="circle-container border-black border-2 h-screen w-[100vh] flex justify-center items-center">
 
           <svg fill="none" class="circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <circle class="circle" cx="50" cy="50" r="45" />
@@ -494,42 +455,42 @@ export default function Page() {
                   </label>
                 </div> */}
 
-                <div className="cursor-pointer overflow-hidden h-[104px]" onMouseEnter={handleHover} onMouseLeave={handleLeave}
-                  style={{ position: "relative", display: "inline-block" }}>
-                  <Image
-                    src={imageSrc}
-                    alt="profile"
-                    width={104}
-                    height={104}
-                    className="block rounded-full overflow-hidden  p-3  max-w-[104px] h-[104px]"
-                  />
+              <div className="cursor-pointer overflow-hidden border-black border-2  w-[150px]  h-[150px]" onMouseEnter={handleHover} onMouseLeave={handleLeave}
+                style={{ position: "relative", display: "inline-block" }}>
+                <Image
+                  src={imageSrc}
+                  alt="profile"
+                  width={200}
+                  height={200}
+                  className="block rounded-full overflow-hidden  p-3  max-w-[150px] h-[150px]"
+                />
 
-                  {showCameraIcon && (
-                    <label
-                      htmlFor="imageInput"
-                      className="absolute top-[50%] left-[50%] cursor-pointer"
-                      style={{
-                        transform: "translate(-50%, -50%)",
-                      }}
+                {showCameraIcon && (
+                  <label
+                    htmlFor="imageInput"
+                    className="absolute top-[50%] left-[50%] cursor-pointer"
+                    style={{
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  >
+                    <span
+                      role="img"
+                      aria-label="camera"
+                      style={{ fontSize: "24px" }}
                     >
-                      <span
-                        role="img"
-                        aria-label="camera"
-                        style={{ fontSize: "24px" }}
-                      >
-                        📷
-                      </span>
-                    </label>
-                  )}
+                      📷
+                    </span>
+                  </label>
+                )}
 
-                  <input
-                    type="file"
-                    id="imageInput"
-                    accept="image/*"
-                    style={{ display: "none" }}
-                    onChange={handleImageChange}
-                  />
-                </div>
+                <input
+                  type="file"
+                  id="imageInput"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleImageChange}
+                />
+              </div>
             </div>
             <div className=" py-6">
               <p className=" text-red-600 text-2xl font-bold">
@@ -552,12 +513,12 @@ export default function Page() {
                         />{" "}
                       </div>
                     </td>
-                    <td className="border-black border text-left px-8 flex">
+                    <td className="border-black border text-left pl-8 flex">
                       <div className=" justify-center items-center ">
                         {" "}
                         <PiPhoneCallBold />{" "}
                       </div>
-                      <div className="">
+                      <div className="w-[100]">
                         {" "}
                         <input
                           type="number"
@@ -580,10 +541,10 @@ export default function Page() {
                       <input
                         className="px-2"
                         type="number"
-                        pattern="^[0-9]{5}-[0-9]{7}-[0-9]{1}$"
+                        pattern="^[0-9]{13}$"
                         title="Type CNIC Like 12345-1234567-1"
                         required
-                        placeholder="(33100-0000000-0)"
+                        placeholder="(3310005889712)"
                         id="studentCnic"
                         value={studentCnic}
                         onChange={(e) => setStudentCnic(e.target.value)}
