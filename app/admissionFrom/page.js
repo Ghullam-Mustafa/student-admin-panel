@@ -63,20 +63,36 @@ export default function Page() {
     setShowCameraIcon(false);
   };
 
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+
+  //     reader.onload = (event) => {
+  //       const result = event.target?.result;
+  //       setImageSrc(result);
+  //     };
+
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+  
+
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
+      setFile(file); // Add this line to update the file state
       const reader = new FileReader();
-
+  
       reader.onload = (event) => {
         const result = event.target?.result;
         setImageSrc(result);
       };
-
+  
       reader.readAsDataURL(file);
     }
   };
-
+  
 
 
 
@@ -124,20 +140,23 @@ export default function Page() {
       othetTotalMarks,
     };
 
-    const isValid = await userSchema.isValid(AddmissionForm)
-    console.log(isValid)
-    if (!file.name) {
-      alert("Please Select Image", "error");
+    // const isValid = await userSchema.isValid(AddmissionForm)
+    // console.log(isValid)
+    // if (!file.name) {
+    //   alert("Please Select Image", "error");
 
-      return;
-    }
+    //   return;
+    // }
 
 
 
     const randomId = Math.random().toString(36).slice(2);
-
     const imagesRef = ref(storage, `images/${randomId}.${file.name}`);
     const uploadTask = uploadBytesResumable(imagesRef, file);
+
+    // const imagesRef = ref(storage, `images/${randomId}.${file.name}`);
+    // const uploadTask = uploadBytesResumable(imagesRef, file);
+
 
     setIsUploading(true);
     uploadTask.on(
@@ -499,10 +518,10 @@ export default function Page() {
               <div>
                 <table className="w-[100%]">
                   <tr>
-                    <td className="border-black border text-left px-8 ">
-                      <div className="">
-                        Name :{" "}
+                    <td className="border-black border text-left pl-8 flex items-center">
+                   <label htmlFor="">Name: </label>
                         <input
+                        className="w-[100%] "
                           type="text"
                           // name="studentName"
                           id="studentName"
@@ -511,7 +530,7 @@ export default function Page() {
                           onChange={(e) => setStudentName(e.target.value)}
                           required
                         />{" "}
-                      </div>
+                      
                     </td>
                     <td className="border-black border text-left pl-8 flex">
                       <div className=" justify-center items-center ">
@@ -658,10 +677,10 @@ export default function Page() {
                       C.N.I.C. / B-form No:
                       <input
                         type="text"
-                        pattern="^[0-9]{5}-[0-9]{7}-[0-9]{1}$"
+                        pattern="^[0-9]{13}$"
                         title="Type CNIC Like 12345-1234567-1"
                         required
-                        placeholder="(33100-0000000-0)"
+                        placeholder="(3310005889712)"
                         id="fatherCnic"
                         name="fatherCnic"
                         value={fatherCnic}
