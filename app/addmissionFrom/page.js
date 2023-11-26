@@ -14,7 +14,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 
-export default function Page() {
+export default function page() {
   const [form, setForm] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [admissionType, setAdmissionType] = useState("");
