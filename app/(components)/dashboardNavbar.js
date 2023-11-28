@@ -1,10 +1,30 @@
 import React from 'react'
 import Link from 'next/link'
+import {  signOut } from 'firebase/auth';
+import { auth } from '@/config/firebase';
 
 
 export default function dashboardNavbar() {
+
+    const handleLogout = () => {
+        signOut(auth)
+          .then(() => {
+            setUser(null);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
     return (
         <>
+          <div className="text-center flex justify-evenly">
+                <button
+                  className='bg-blue-600 py-3 m-1 px-5 text-white rounded-lg'
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
 
             <nav className="bg-[#D0A5C]  rounded-full p-4">
                 <div className="flex items-center justify-between">
