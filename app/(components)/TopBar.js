@@ -20,14 +20,14 @@ export default function TopBar({ showNav, setShowNav }) {
         showNav ? "pl-56" : ""
       }`}
     >
-      <div className="pl-4 md:pl-16">
+      {/* <div className="pl-4 md:pl-16">
         <Bars3CenterLeftIcon
           className="h-8 w-8 text-gray-700 cursor-pointer"
           onClick={() => setShowNav(!showNav)}
         />
-      </div>
-      <div className="flex items-center pr-4 md:pr-16">
-        <Popover className="relative">
+      </div> */}
+      {/* <div className="flex items-center pr-4 md:pr-16"> */}
+        {/* <Popover className="relative">
           <Popover.Button className="outline-none mr-5 md:mr-8 cursor-pointer text-gray-700">
             <AiFillBell className="h-6 w-6" />
           </Popover.Button>
@@ -105,8 +105,8 @@ export default function TopBar({ showNav, setShowNav }) {
               </div>
             </Popover.Panel>
           </Transition>
-        </Popover>
-        <Menu as="div" className="relative inline-block text-left">
+        </Popover> */}
+        {/* <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center items-center">
               <picture>
@@ -163,8 +163,8 @@ export default function TopBar({ showNav, setShowNav }) {
               </div>
             </Menu.Items>
           </Transition>
-        </Menu>
-      </div>
+        </Menu> */}
+      {/* </div> */}
     </div>
   );
 }

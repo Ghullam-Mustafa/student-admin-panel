@@ -8,6 +8,13 @@ import { HiUserGroup } from 'react-icons/hi'
 import { FcOvertime } from 'react-icons/fc'
 import { ImBooks } from 'react-icons/im'
 import DashboardNavbar from './dashboardNavbar';
+import { FaBookMedical } from "react-icons/fa";
+import { MdEngineering } from "react-icons/md";
+import { BsFillRocketTakeoffFill } from "react-icons/bs";
+import { GrCloudComputer } from "react-icons/gr";
+import { IoStatsChart } from "react-icons/io5";
+import { IoBusinessSharp } from "react-icons/io5";
+import { FaComputer } from "react-icons/fa6";
 
 export default function Headercard() {
   const [loading, setLoading] = useState(false);
@@ -146,16 +153,16 @@ export default function Headercard() {
 
       <DashboardNavbar />
 
-      <p className="text-gray-700 text-3xl mb-16 font-bold">Dashboard</p>
+      <p className="text-gray-700 text-3xl mb-6 font-bold">Dashboard</p>
 
 
-      <div className="grid lg:grid-cols-3 gap-5 mb-16">
+      <div className="grid lg:grid-cols-3 gap-5 mb-8">
         <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
           <div className="flex justify-between px-8 py-2 ">
             <p className="  font-sans text-2xl text-[#7072da] p-2 ">F.Sc Medical Students</p>
             <div className="">
               <div className="rounded-full p-2  bg-[#7072da] ">
-                <ImBooks className="text-4xl font-bold" />
+                <FaBookMedical className="text-4xl font-bold" />
               </div>
             </div>
           </div>
@@ -173,7 +180,7 @@ export default function Headercard() {
               F.Sc Pre-Engineering</p>
             <div className="">
               <div className="rounded-full p-2 bg-[#868a88] ">
-                <HiUserGroup className="text-4xl" />
+                <MdEngineering className="text-4xl" />
               </div>
             </div>
           </div>
@@ -192,7 +199,7 @@ export default function Headercard() {
           <div className="flex justify-between px-8 py-2 ">
             <p className="  font-sans text-2xl p-2 text-[#8B635C] ">ICS (Physics) Students </p>
             <div className=""><div className="rounded-full p-2 bg-[#8B635C] ">
-              <FcOvertime className="text-4xl" />
+              <GrCloudComputer  className="text-4xl" />
             </div></div>
           </div>
           <div className="font-bold text-[#8B635C] mx-10 my-4 text-2xl">
@@ -211,7 +218,7 @@ export default function Headercard() {
             <p className="  font-sans text-2xl text-[#7072da] p-2 ">ICS (Statistics) Students</p>
             <div className="">
               <div className="rounded-full p-2  bg-[#7072da] ">
-                <ImBooks className="text-4xl font-bold" />
+                <IoStatsChart className="text-4xl font-bold" />
               </div></div>
           </div>
           <div className="font-bold text-[#7072da] mx-10 my-4 text-2xl">
@@ -222,34 +229,34 @@ export default function Headercard() {
             </tr>) : (icsStatisticStudent.length)}
           </div>
         </div>
-        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
+        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#868a88] ">
           <div className="flex justify-between px-8 py-2 ">
-            <p className="  font-sans text-2xl text-[#7072da] p-2 ">I.Com Students</p>
+            <p className="  font-sans text-2xl text-[#868a88] p-2 ">I.Com Students</p>
             <div className="">
-              <div className="rounded-full p-2  bg-[#7072da] ">
-                <ImBooks className="text-4xl font-bold" />
+              <div className="rounded-full p-2  bg-[#868a88] ">
+                <IoBusinessSharp className="text-4xl font-bold" />
               </div>
             </div>
           </div>
-          <div className="font-bold text-[#7072da] mx-10 my-10 text-2xl">
+          <div className="font-bold text-[#868a88] mx-10 my-10 text-2xl">
             {loading ? (<tr className="text-center">
-              <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+              <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
                 Loading...
               </td>
             </tr>) : (iComStudent.length)}
           </div>
         </div>
-        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
+        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#8B635C] ">
           <div className="flex justify-between px-8 py-2 ">
-            <p className="  font-sans text-2xl text-[#7072da] p-2 ">F.A(IT) Students</p>
+            <p className="  font-sans text-2xl text-[#8B635C] p-2 ">F.A(IT) Students</p>
 
-            <div className="rounded-full p-2  bg-[#7072da] ">
-              <ImBooks className="text-4xl font-bold" />
+            <div className="rounded-full p-2  bg-[#8B635C] ">
+                <FaComputer className="text-4xl font-bold" />
             </div>
           </div>
-          <div className="font-bold text-[#7072da] mx-10 my-10 text-2xl">
+          <div className="font-bold text-[#8B635C] mx-10 my-10 text-2xl">
             {loading ? (<tr className="text-center">
-              <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+              <td colSpan="4" className="text-xl text-[#8B635C] font-bold mt-10">
                 Loading...
               </td>
             </tr>) : (faItStudent.length)}
