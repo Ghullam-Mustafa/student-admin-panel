@@ -51,7 +51,7 @@ export default function Page() {
             <div className=" grid grid-cols-2 gap-4">
                 {student?.map((item,i) => {
                     return <>
-                        <div key={i} className=" border-silver border-2 rounded-lg p-5">
+                        <div key={i} className=" border-silver border-2 shadow-lg shadow-slate-800 rounded-lg p-5">
                             <div className="    w-[20%]">
                                 <img className=' items-center justify-center' src={item.projectImage} alt="" />
                             </div>
