@@ -14,7 +14,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 
-export default function AddmissionFormm() {
+export default function AddmissionFormm
+  () {
   const [form, setForm] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [admissionType, setAdmissionType] = useState("");
@@ -37,11 +38,11 @@ export default function AddmissionFormm() {
   const [obtainedMarks, setObtainedMarks] = useState("");
   const [totalMarks, setTotalMarks] = useState("");
   const [insitute, setinsitute] = useState("");
-  const [otherYear, setOtherYear] = useState("");
-  const [otherRollNo, setOtherRollNo] = useState("");
-  const [OtherObtainedMarks, setOtherObtainedMarks] = useState("");
-  const [othetTotalMarks, setOtherTotalMarks] = useState("");
-  const [otherInsitute, setOthertinsitute] = useState("");
+  // const [otherYear, setOtherYear] = useState("");
+  // const [otherRollNo, setOtherRollNo] = useState("");
+  // const [OtherObtainedMarks, setOtherObtainedMarks] = useState("");
+  // const [othetTotalMarks, setOtherTotalMarks] = useState("");
+  // const [otherInsitute, setOthertinsitute] = useState("");
   const [file, setFile] = useState({});
   const [isUploading, setIsUploading] = useState(false)
 
@@ -133,11 +134,13 @@ export default function AddmissionFormm() {
       obtainedMarks,
       totalMarks,
       insitute,
-      otherYear,
-      otherRollNo,
-      OtherObtainedMarks,
-      otherInsitute,
-      othetTotalMarks,
+      // otherYear,
+      // otherRollNo,
+      // OtherObtainedMarks,
+      // otherInsitute,
+      // othetTotalMarks,
+
+
     };
 
     // const isValid = await userSchema.isValid(AddmissionForm)
@@ -198,17 +201,18 @@ export default function AddmissionFormm() {
             obtainedMarks,
             totalMarks,
             insitute,
-            otherYear,
-            otherRollNo,
-            OtherObtainedMarks,
-            otherInsitute,
-            othetTotalMarks,
+            // otherYear,
+            // otherRollNo,
+            // OtherObtainedMarks,
+            // otherInsitute,
+            // othetTotalMarks,
           };
 
           let studendData = { ...AddmissionForm, projectImage };
           console.log(studendData);
 
           AddProjectData(studendData);
+
         });
       }
     );
@@ -231,6 +235,39 @@ export default function AddmissionFormm() {
         return;
       }
     };
+
+    clear()
+  };
+
+  const clear = () => {
+    setSelectedCourse('');
+    setAdmissionType('');
+    setStudentName('');
+    setStudentPhoneNumber('');
+    setStudentCnic('');
+    setStudentWhatsappNumber('');
+    setMarkOfIdentification('');
+    setDateOfBirth('');
+    setFatherName('');
+    setFatherPhoneNumber('');
+    setFahterCnic('');
+    setFatherWhatsappNumber('');
+    setFatherOccupation('');
+    setReligion('');
+    setHomeAddress('');
+    setStudentEmail('');
+    setMatriculationYear('');
+    setBoardRollNo('');
+    setObtainedMarks('');
+    setTotalMarks('');
+    setinsitute('');
+    // setOtherYear('');
+    // setOtherRollNo('');
+    // setOtherObtainedMarks('');
+    // setOthertinsitute('');
+    // setOtherTotalMarks('');
+    // Assuming setImageSrc is a valid function
+    // setImageSrc('');
   };
 
 
@@ -239,11 +276,12 @@ export default function AddmissionFormm() {
     <>
 
       {isUploading ? <>
-        <div class="circle-container border-black border-2 h-screen w-[100vh] flex justify-center items-center">
-
-          <svg fill="none" class="circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle class="circle" cx="50" cy="50" r="45" />
-          </svg>
+        <div className="flex justify-center items-center">
+          <div class="circle-container h-screen w-screen flex justify-center items-center">
+            <svg fill="none" class="circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle class="circle" cx="50" cy="50" r="45" />
+            </svg>
+          </div>
         </div>
       </> : <>
 
@@ -516,113 +554,115 @@ export default function AddmissionFormm() {
                 STUDENT'S PROFILE
               </p>
               <div>
-                <div className="">
-                  <div className="grid grid-cols-2">
-                    <div className="border-black border text-left pl-8 flex ">
-                      <label htmlFor="">Name: </label>
-                      <input
-                        className="w-[100%] "
-                        type="text"
-                        // name="studentName"
-                        id="studentName"
-                        // placeholder="Enter your Name"
-                        value={studentName}
-                        onChange={(e) => setStudentName(e.target.value)}
-                        required
-                      />{" "}
+                <div>
+                  <div className="">
+                    <div className="grid grid-cols-2">
+                      <div className="border-black border text-left pl-8 flex ">
+                        <label htmlFor="">Name: </label>
+                        <input
+                          className="w-[100%] "
+                          type="text"
+                          // name="studentName"
+                          id="studentName"
+                          // placeholder="Enter your Name"
+                          value={studentName}
+                          onChange={(e) => setStudentName(e.target.value)}
+                          required
+                        />{" "}
 
-                    </div>
-                    <div className="border-black border text-left pl-8  flex">
-                      <div className="justify-center flex items-center">
-                        <PiPhoneCallBold />
                       </div>
-                      {" "}
-                      <input
-                        className="w-[100%]"
-                        type="number"
-                        name="studentphoneNumber"
-                        id="studentphoneNumber"
-                        // placeholder="Enter your Phone Number"
-                        pattern="^[0-9]{11}$"
-                        value={studentphoneNumber}
-                        onChange={(e) => setStudentPhoneNumber(e.target.value)}
-                        title="Type CNIC Like 03300000000"
-                        required
-                      />
-
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
-                    <div className="border-black border text-left pl-8 flex">
-                      <label htmlFor="">C.N.I.C./B-form No:</label>
-                      <input
-                        className="w-[100%]"
-                        type="number"
-                        pattern="^[0-9]{13}$"
-                        title="Type CNIC Like 12345-1234567-1"
-                        required
-                        placeholder="(3310005889712)"
-                        id="studentCnic"
-                        value={studentCnic}
-                        onChange={(e) => setStudentCnic(e.target.value)}
-                      />
-                    </div>
-                    <div className="border-black border text-left pl-8 flex">
-                      <div className=" justify-center flex items-center ">
+                      <div className="border-black border text-left pl-8  flex">
+                        <div className="justify-center flex items-center">
+                          <PiPhoneCallBold />
+                        </div>
                         {" "}
-                        <FaWhatsapp />{" "}
+                        <input
+                          className="w-[100%]"
+                          type="number"
+                          name="studentphoneNumber"
+                          id="studentphoneNumber"
+                          // placeholder="Enter your Phone Number"
+                          pattern="^[0-9]{11}$"
+                          value={studentphoneNumber}
+                          onChange={(e) => setStudentPhoneNumber(e.target.value)}
+                          title="Type CNIC Like 03300000000"
+                          required
+                        />
+
                       </div>
-
-                      {" "}
-                      <input
-                        className="w-[100%]"
-                        type="number"
-                        name="studentWhatsappNumber"
-                        id="studentWhatsappNumber"
-                        // placeholder="Enter your Phone Number"
-                        pattern="^[0-9]{11}$"
-                        required
-                        value={studentWhatsappNumber}
-                        onChange={(e) =>
-                          setStudentWhatsappNumber(e.target.value)
-                        }
-                      />
-
                     </div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    <div className="border-black border text-left flex pl-8">
+                    <div className="grid grid-cols-2">
+                      {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
+                      <div className="border-black border text-left pl-8 flex">
+                        <label htmlFor="">C.N.I.C./B-form No:</label>
+                        <input
+                          className="w-[100%]"
+                          type="number"
+                          pattern="^[0-9]{13}$"
+                          title="Type CNIC Like 12345-1234567-1"
+                          required
+                          placeholder="(3310005889712)"
+                          id="studentCnic"
+                          value={studentCnic}
+                          onChange={(e) => setStudentCnic(e.target.value)}
+                        />
+                      </div>
+                      <div className="border-black border text-left pl-8 flex">
+                        <div className=" justify-center flex items-center ">
+                          {" "}
+                          <FaWhatsapp />{" "}
+                        </div>
 
-                      <label htmlFor="">Mark of Identification:</label>
-                      <input
-                        className="w-[100%]"
-                        type="text"
-                        name="markOfIdentification"
-                        id="markOfIdentification"
-                        // placeholder="Mark of Identification"
-                        required
-                        value={markOfIdentification}
-                        onChange={(e) =>
-                          setMarkOfIdentification(e.target.value)
-                        }
-                      />{" "}
+                        {" "}
+                        <input
+                          className="w-[100%]"
+                          type="number"
+                          name="studentWhatsappNumber"
+                          id="studentWhatsappNumber"
+                          // placeholder="Enter your Phone Number"
+                          pattern="^[0-9]{11}$"
+                          required
+                          value={studentWhatsappNumber}
+                          onChange={(e) =>
+                            setStudentWhatsappNumber(e.target.value)
+                          }
+                        />
 
+                      </div>
                     </div>
-                    <div className="border-black border text-left flex pl-8">
-                      <label htmlFor="">Date of Birth:</label>
+                    <div className="grid grid-cols-2">
+                      <div className="border-black border text-left flex pl-8">
 
-                      <input
-                        className="w-[100%]"
-                        type="date"
-                        name="dateOfBirth"
-                        id="dateOfBirth"
-                        placeholder="Enter your Date of Birth"
-                        required
-                        value={dateOfBirth}
-                        onChange={(e) => setDateOfBirth(e.target.value)}
-                      />{" "}
+                        <label htmlFor="">Mark of Identification:</label>
+                        <input
+                          className="w-[100%]"
+                          type="text"
+                          name="markOfIdentification"
+                          id="markOfIdentification"
+                          // placeholder="Mark of Identification"
+                          required
+                          value={markOfIdentification}
+                          onChange={(e) =>
+                            setMarkOfIdentification(e.target.value)
+                          }
+                        />{" "}
 
+                      </div>
+                      <div className="border-black border text-left flex pl-8">
+                        <label htmlFor="">Date of Birth:</label>
+
+                        <input
+                          className="w-[100%]"
+                          type="date"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
+                          placeholder="Enter your Date of Birth"
+                          required
+                          value={dateOfBirth}
+                          onChange={(e) => setDateOfBirth(e.target.value)}
+                        />{" "}
+
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -634,88 +674,89 @@ export default function AddmissionFormm() {
                 FATHER'S / GUARRIAN'S PROFILE
               </p>
               <div>
-                <div className="">
-                  <div className="grid grid-cols-2">
-                    <div className="border-black border text-left pl-8 flex">
-                      <label htmlFor="">Name:</label>
+                <div>
+                  <div className="">
+                    <div className="grid grid-cols-2">
+                      <div className="border-black border text-left pl-8 flex">
+                        <label htmlFor="">Name:</label>
 
-                      <input
-                        className="w-[100%]"
-                        type="text"
-                        name="fatherName"
-                        id="fatherName"
-                        // placeholder="Enter your Father Name"
-                        required
-                        value={fatherName}
-                        onChange={(e) => setFatherName(e.target.value)}
-                      />{" "}
+                        <input
+                          className="w-[100%]"
+                          type="text"
+                          name="fatherName"
+                          id="fatherName"
+                          // placeholder="Enter your Father Name"
+                          required
+                          value={fatherName}
+                          onChange={(e) => setFatherName(e.target.value)}
+                        />{" "}
 
-                    </div>
-                    <div className="border-black border text-left pl-8 flex">
-                      <div className=" justify-center flex items-center ">
-                        {" "}
-                        <PiPhoneCallBold />{" "}
                       </div>
+                      <div className="border-black border text-left pl-8 flex">
+                        <div className=" justify-center flex items-center ">
+                          {" "}
+                          <PiPhoneCallBold />{" "}
+                        </div>
 
-                      {" "}
-                      <input
-                        className="w-[100%]"
-                        type="number"
-                        name="fatherPhoneNumber"
-                        id="fatherPhoneNumber"
-                        // placeholder="Enter your Phone Number"
-                        required
-                        pattern="^[0-9]{11}$"
-                        value={fatherPhoneNumber}
-                        onChange={(e) => setFatherPhoneNumber(e.target.value)}
-                      />
-
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
-                    <div className="border-black border text-left flex pl-8">
-                      <label htmlFor=""> C.N.I.C. / B-form No:</label>
-                      <input
-                        className="w-[100%]"
-                        type="text"
-                        pattern="^[0-9]{13}$"
-                        title="Type CNIC Like 12345-1234567-1"
-                        required
-                        placeholder="(3310005889712)"
-                        id="fatherCnic"
-                        name="fatherCnic"
-                        value={fatherCnic}
-                        onChange={(e) => setFahterCnic(e.target.value)}
-                      />
-                    </div>
-                    <div className="border-black border text-left pl-8 flex">
-                      <div className=" justify-center items-center flex ">
                         {" "}
-                        <FaWhatsapp />{" "}
+                        <input
+                          className="w-[100%]"
+                          type="number"
+                          name="fatherPhoneNumber"
+                          id="fatherPhoneNumber"
+                          // placeholder="Enter your Phone Number"
+                          required
+                          pattern="^[0-9]{11}$"
+                          value={fatherPhoneNumber}
+                          onChange={(e) => setFatherPhoneNumber(e.target.value)}
+                        />
+
                       </div>
-
-                      {" "}
-                      <input
-                        className="w-[100%]"
-                        type="number"
-
-                        name="fatherWhatsappNumber"
-                        id="fatherWhatsappNumber"
-                        // placeholder="Enter your Phone Number"
-                        required
-                        pattern="^[0-9]{11}$"
-                        value={fatherWhatsappNumber}
-                        onChange={(e) =>
-                          setFatherWhatsappNumber(e.target.value)
-                        }
-                      />
-
                     </div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    <div className="border-black border text-left flex pl-8">
-                    <label htmlFor="">Occupation:</label>
+                    <div className="grid grid-cols-2">
+                      {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
+                      <div className="border-black border text-left flex pl-8">
+                        <label htmlFor=""> C.N.I.C:</label>
+                        <input
+                          className="w-[100%]"
+                          type="number"
+                          pattern="^[0-9]{13}$"
+                          title="Type CNIC Like 12345-1234567-1"
+                          required
+                          placeholder="(3310005889712)"
+                          id="fatherCnic"
+                          name="fatherCnic"
+                          value={fatherCnic}
+                          onChange={(e) => setFahterCnic(e.target.value)}
+                        />
+                      </div>
+                      <div className="border-black border text-left pl-8 flex">
+                        <div className=" justify-center items-center flex ">
+                          {" "}
+                          <FaWhatsapp />{" "}
+                        </div>
+
+                        {" "}
+                        <input
+                          className="w-[100%]"
+                          type="number"
+
+                          name="fatherWhatsappNumber"
+                          id="fatherWhatsappNumber"
+                          // placeholder="Enter your Phone Number"
+                          required
+                          pattern="^[0-9]{11}$"
+                          value={fatherWhatsappNumber}
+                          onChange={(e) =>
+                            setFatherWhatsappNumber(e.target.value)
+                          }
+                        />
+
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2">
+                      <div className="border-black border text-left flex pl-8">
+                        <label htmlFor="">Occupation:</label>
                         {" "}
                         <input
                           type="text"
@@ -727,13 +768,13 @@ export default function AddmissionFormm() {
                           value={fatherOccupation}
                           onChange={(e) => setFatherOccupation(e.target.value)}
                         />{" "}
-                     
-                    </div>
-                    <div className="border-black border text-left flex pl-8">
-                      <label htmlFor="">Religion:</label>
-                        
+
+                      </div>
+                      <div className="border-black border text-left flex pl-8">
+                        <label htmlFor="">Religion:</label>
+
                         <input
-                        className="w-[100%]"
+                          className="w-[100%]"
                           type="text"
                           name="Religion"
                           id="Religion"
@@ -742,37 +783,38 @@ export default function AddmissionFormm() {
                           value={Religion}
                           onChange={(e) => setReligion(e.target.value)}
                         />{" "}
-                     
+
+                      </div>
                     </div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    <div className="border-black border text-left flex pl-8">
-                      <label htmlFor=""> Home Address:{" "}</label>
-                     
-                      <input
-                      className="w-[100%]"
-                        type="text"
-                        name="homeAddress"
-                        id="homeAddress"
-                        // placeholder="Enter your home address "
-                        required
-                        value={homeAddress}
-                        onChange={(e) => setHomeAddress(e.target.value)}
-                      />{" "}
-                    </div>
-                    <div className="border-black border text-left flex pl-8">
-                      <label htmlFor=""> Email:</label>
-                     
-                      <input
-                      className="w-[100%]"
-                        type="text"
-                        name="studentEmail"
-                        id="studentEmail"
-                        // placeholder="Enter your Email address "
-                        required
-                        value={studentEmail}
-                        onChange={(e) => setStudentEmail(e.target.value)}
-                      />
+                    <div className="grid grid-cols-2">
+                      <div className="border-black border text-left flex pl-8">
+                        <label htmlFor=""> Home Address:{" "}</label>
+
+                        <input
+                          className="w-[100%]"
+                          type="text"
+                          name="homeAddress"
+                          id="homeAddress"
+                          // placeholder="Enter your home address "
+                          required
+                          value={homeAddress}
+                          onChange={(e) => setHomeAddress(e.target.value)}
+                        />{" "}
+                      </div>
+                      <div className="border-black border text-left flex pl-8">
+                        <label htmlFor=""> Email:</label>
+
+                        <input
+                          className="w-[100%]"
+                          type="text"
+                          name="studentEmail"
+                          id="studentEmail"
+                          // placeholder="Enter your Email address "
+                          required
+                          value={studentEmail}
+                          onChange={(e) => setStudentEmail(e.target.value)}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -859,7 +901,7 @@ export default function AddmissionFormm() {
                       />
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td className="border-black border text-left font-bold ">
                       Others
                     </td>
@@ -913,7 +955,7 @@ export default function AddmissionFormm() {
 
                       />
                     </td>
-                  </tr>
+                  </tr> */}
                 </table>
               </div>
             </div>

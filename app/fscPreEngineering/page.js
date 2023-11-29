@@ -24,7 +24,7 @@ export default function Page() {
                 studentData.push({
                     id: doc.id,
                     ...doc.data(),
-                    selectedCourse: "F.Sc Medical",
+                    selectedCourse: "F.Sc Pre-Engineering",
                 });
             });
             console.log("studentData", studentData);

@@ -37,11 +37,11 @@ export default function page() {
   const [obtainedMarks, setObtainedMarks] = useState("");
   const [totalMarks, setTotalMarks] = useState("");
   const [insitute, setinsitute] = useState("");
-  const [otherYear, setOtherYear] = useState("");
-  const [otherRollNo, setOtherRollNo] = useState("");
-  const [OtherObtainedMarks, setOtherObtainedMarks] = useState("");
-  const [othetTotalMarks, setOtherTotalMarks] = useState("");
-  const [otherInsitute, setOthertinsitute] = useState("");
+  // const [otherYear, setOtherYear] = useState("");
+  // const [otherRollNo, setOtherRollNo] = useState("");
+  // const [OtherObtainedMarks, setOtherObtainedMarks] = useState("");
+  // const [othetTotalMarks, setOtherTotalMarks] = useState("");
+  // const [otherInsitute, setOthertinsitute] = useState("");
   const [file, setFile] = useState({});
   const [isUploading, setIsUploading] = useState(false)
 
@@ -133,11 +133,11 @@ export default function page() {
       obtainedMarks,
       totalMarks,
       insitute,
-      otherYear,
-      otherRollNo,
-      OtherObtainedMarks,
-      otherInsitute,
-      othetTotalMarks,
+      // otherYear,
+      // otherRollNo,
+      // OtherObtainedMarks,
+      // otherInsitute,
+      // othetTotalMarks,
 
 
     };
@@ -200,11 +200,11 @@ export default function page() {
             obtainedMarks,
             totalMarks,
             insitute,
-            otherYear,
-            otherRollNo,
-            OtherObtainedMarks,
-            otherInsitute,
-            othetTotalMarks,
+            // otherYear,
+            // otherRollNo,
+            // OtherObtainedMarks,
+            // otherInsitute,
+            // othetTotalMarks,
           };
 
           let studendData = { ...AddmissionForm, projectImage };
@@ -235,7 +235,7 @@ export default function page() {
       }
     };
 
-    window.location.reload();
+    clear()
   };
 
   const clear = () => {
@@ -260,13 +260,13 @@ export default function page() {
     setObtainedMarks('');
     setTotalMarks('');
     setinsitute('');
-    setOtherYear('');
-    setOtherRollNo('');
-    setOtherObtainedMarks('');
-    setOthertinsitute('');
-    setOtherTotalMarks('');
+    // setOtherYear('');
+    // setOtherRollNo('');
+    // setOtherObtainedMarks('');
+    // setOthertinsitute('');
+    // setOtherTotalMarks('');
     // Assuming setImageSrc is a valid function
-    setImageSrc('');
+    // setImageSrc('');
   };
 
 
@@ -275,12 +275,13 @@ export default function page() {
     <>
 
       {isUploading ? <>
+      <div className="flex justify-center items-center">
         <div class="circle-container h-screen w-screen flex justify-center items-center">
           <svg fill="none" class="circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <circle class="circle" cx="50" cy="50" r="45" />
           </svg>
         </div>
-
+        </div>
       </> : <>
 
         <div className="bg-white border-2 border-black p-2">
@@ -552,9 +553,10 @@ export default function page() {
                 STUDENT'S PROFILE
               </p>
               <div>
-                <table className="w-[100%]">
-                  <tr>
-                    <td className="border-black border text-left pl-8 flex items-center">
+              <div>
+                <div className="">
+                  <div className="grid grid-cols-2">
+                    <div className="border-black border text-left pl-8 flex ">
                       <label htmlFor="">Name: </label>
                       <input
                         className="w-[100%] "
@@ -567,34 +569,33 @@ export default function page() {
                         required
                       />{" "}
 
-                    </td>
-                    <td className="border-black border text-left pl-8 flex">
-                      <div className=" justify-center items-center ">
-                        {" "}
-                        <PiPhoneCallBold />{" "}
+                    </div>
+                    <div className="border-black border text-left pl-8  flex">
+                      <div className="justify-center flex items-center">
+                        <PiPhoneCallBold />
                       </div>
-                      <div className="w-[100]">
-                        {" "}
-                        <input
-                          type="number"
-                          name="studentphoneNumber"
-                          id="studentphoneNumber"
-                          // placeholder="Enter your Phone Number"
-                          pattern="^[0-9]{11}$"
-                          value={studentphoneNumber}
-                          onChange={(e) => setStudentPhoneNumber(e.target.value)}
-                          title="Type CNIC Like 03300000000"
-                          required
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
-                    <td className="border-black border text-left px-8">
-                      C.N.I.C. / B-form No:
+                      {" "}
                       <input
-                        className="px-2"
+                        className="w-[100%]"
+                        type="number"
+                        name="studentphoneNumber"
+                        id="studentphoneNumber"
+                        // placeholder="Enter your Phone Number"
+                        pattern="^[0-9]{11}$"
+                        value={studentphoneNumber}
+                        onChange={(e) => setStudentPhoneNumber(e.target.value)}
+                        title="Type CNIC Like 03300000000"
+                        required
+                      />
+
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
+                    <div className="border-black border text-left pl-8 flex">
+                      <label htmlFor="">C.N.I.C./B-form No:</label>
+                      <input
+                        className="w-[100%]"
                         type="number"
                         pattern="^[0-9]{13}$"
                         title="Type CNIC Like 12345-1234567-1"
@@ -604,65 +605,66 @@ export default function page() {
                         value={studentCnic}
                         onChange={(e) => setStudentCnic(e.target.value)}
                       />
-                    </td>
-                    <td className="border-black border text-left px-8 flex">
-                      <div className=" justify-center items-center ">
+                    </div>
+                    <div className="border-black border text-left pl-8 flex">
+                      <div className=" justify-center flex items-center ">
                         {" "}
                         <FaWhatsapp />{" "}
                       </div>
-                      <div className="">
-                        {" "}
-                        <input
-                          className="px-2"
-                          type="number"
-                          name="studentWhatsappNumber"
-                          id="studentWhatsappNumber"
-                          // placeholder="Enter your Phone Number"
-                          pattern="^[0-9]{11}$"
-                          required
-                          value={studentWhatsappNumber}
-                          onChange={(e) =>
-                            setStudentWhatsappNumber(e.target.value)
-                          }
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border-black border text-left px-8">
-                      <div className="">
-                        Mark of Identification:{" "}
-                        <input
-                          className="px-2"
-                          type="text"
-                          name="markOfIdentification"
-                          id="markOfIdentification"
-                          // placeholder="Mark of Identification"
-                          required
-                          value={markOfIdentification}
-                          onChange={(e) =>
-                            setMarkOfIdentification(e.target.value)
-                          }
-                        />{" "}
-                      </div>
-                    </td>
-                    <td className="border-black border text-left px-8">
-                      <div className="">
-                        Date of Birth:
-                        <input
-                          className="px-2"
-                          type="date"
-                          name="dateOfBirth"
-                          id="dateOfBirth"
-                          placeholder="Enter your Date of Birth"
-                          required
-                          value={dateOfBirth}
-                          onChange={(e) => setDateOfBirth(e.target.value)}
-                        />{" "}
-                      </div>
-                    </td>
-                  </tr>
-                </table>
+
+                      {" "}
+                      <input
+                        className="w-[100%]"
+                        type="number"
+                        name="studentWhatsappNumber"
+                        id="studentWhatsappNumber"
+                        // placeholder="Enter your Phone Number"
+                        pattern="^[0-9]{11}$"
+                        required
+                        value={studentWhatsappNumber}
+                        onChange={(e) =>
+                          setStudentWhatsappNumber(e.target.value)
+                        }
+                      />
+
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="border-black border text-left flex pl-8">
+
+                      <label htmlFor="">Mark of Identification:</label>
+                      <input
+                        className="w-[100%]"
+                        type="text"
+                        name="markOfIdentification"
+                        id="markOfIdentification"
+                        // placeholder="Mark of Identification"
+                        required
+                        value={markOfIdentification}
+                        onChange={(e) =>
+                          setMarkOfIdentification(e.target.value)
+                        }
+                      />{" "}
+
+                    </div>
+                    <div className="border-black border text-left flex pl-8">
+                      <label htmlFor="">Date of Birth:</label>
+
+                      <input
+                        className="w-[100%]"
+                        type="date"
+                        name="dateOfBirth"
+                        id="dateOfBirth"
+                        placeholder="Enter your Date of Birth"
+                        required
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                      />{" "}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
 
@@ -671,47 +673,51 @@ export default function page() {
                 FATHER'S / GUARRIAN'S PROFILE
               </p>
               <div>
-                <table className="w-[100%]">
-                  <tr>
-                    <td className="border-black border text-left px-8 ">
-                      <div className="">
-                        Name :{" "}
-                        <input
-                          type="text"
-                          name="fatherName"
-                          id="fatherName"
-                          // placeholder="Enter your Father Name"
-                          required
-                          value={fatherName}
-                          onChange={(e) => setFatherName(e.target.value)}
-                        />{" "}
-                      </div>
-                    </td>
-                    <td className="border-black border text-left px-8 flex">
-                      <div className=" justify-center items-center ">
+              <div>
+                <div className="">
+                  <div className="grid grid-cols-2">
+                    <div className="border-black border text-left pl-8 flex">
+                      <label htmlFor="">Name:</label>
+
+                      <input
+                        className="w-[100%]"
+                        type="text"
+                        name="fatherName"
+                        id="fatherName"
+                        // placeholder="Enter your Father Name"
+                        required
+                        value={fatherName}
+                        onChange={(e) => setFatherName(e.target.value)}
+                      />{" "}
+
+                    </div>
+                    <div className="border-black border text-left pl-8 flex">
+                      <div className=" justify-center flex items-center ">
                         {" "}
                         <PiPhoneCallBold />{" "}
                       </div>
-                      <div className="">
-                        {" "}
-                        <input
-                          type="number"
-                          name="fatherPhoneNumber"
-                          id="fatherPhoneNumber"
-                          // placeholder="Enter your Phone Number"
-                          required
-                          pattern="^[0-9]{11}$"
-                          value={fatherPhoneNumber}
-                          onChange={(e) => setFatherPhoneNumber(e.target.value)}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
-                    <td className="border-black border text-left px-8">
-                      C.N.I.C.:
+
+                      {" "}
                       <input
+                        className="w-[100%]"
+                        type="number"
+                        name="fatherPhoneNumber"
+                        id="fatherPhoneNumber"
+                        // placeholder="Enter your Phone Number"
+                        required
+                        pattern="^[0-9]{11}$"
+                        value={fatherPhoneNumber}
+                        onChange={(e) => setFatherPhoneNumber(e.target.value)}
+                      />
+
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
+                    <div className="border-black border text-left flex pl-8">
+                      <label htmlFor=""> C.N.I.C:</label>
+                      <input
+                        className="w-[100%]"
                         type="number"
                         pattern="^[0-9]{13}$"
                         title="Type CNIC Like 12345-1234567-1"
@@ -722,37 +728,38 @@ export default function page() {
                         value={fatherCnic}
                         onChange={(e) => setFahterCnic(e.target.value)}
                       />
-                    </td>
-                    <td className="border-black border text-left px-8 flex">
-                      <div className=" justify-center items-center ">
+                    </div>
+                    <div className="border-black border text-left pl-8 flex">
+                      <div className=" justify-center items-center flex ">
                         {" "}
                         <FaWhatsapp />{" "}
                       </div>
-                      <div className="">
+
+                      {" "}
+                      <input
+                        className="w-[100%]"
+                        type="number"
+
+                        name="fatherWhatsappNumber"
+                        id="fatherWhatsappNumber"
+                        // placeholder="Enter your Phone Number"
+                        required
+                        pattern="^[0-9]{11}$"
+                        value={fatherWhatsappNumber}
+                        onChange={(e) =>
+                          setFatherWhatsappNumber(e.target.value)
+                        }
+                      />
+
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="border-black border text-left flex pl-8">
+                    <label htmlFor="">Occupation:</label>
                         {" "}
                         <input
-                          className="bg-gray-200 appearance-none border-2  border-gray-200 rounded w-full  px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                          type="number"
-
-                          name="fatherWhatsappNumber"
-                          id="fatherWhatsappNumber"
-                          // placeholder="Enter your Phone Number"
-                          required
-                          pattern="^[0-9]{11}$"
-                          value={fatherWhatsappNumber}
-                          onChange={(e) =>
-                            setFatherWhatsappNumber(e.target.value)
-                          }
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border-black border text-left px-8">
-                      <div className="">
-                        Occupation :{" "}
-                        <input
                           type="text"
+                          className="w-[100%]"
                           name="fatherOccupation"
                           id="fatherOccupation"
                           // placeholder="Occupation"
@@ -760,12 +767,13 @@ export default function page() {
                           value={fatherOccupation}
                           onChange={(e) => setFatherOccupation(e.target.value)}
                         />{" "}
-                      </div>
-                    </td>
-                    <td className="border-black border text-left px-8">
-                      <div className="">
-                        Religion:
+                     
+                    </div>
+                    <div className="border-black border text-left flex pl-8">
+                      <label htmlFor="">Religion:</label>
+                        
                         <input
+                        className="w-[100%]"
                           type="text"
                           name="Religion"
                           id="Religion"
@@ -774,13 +782,15 @@ export default function page() {
                           value={Religion}
                           onChange={(e) => setReligion(e.target.value)}
                         />{" "}
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border-black border text-left px-8">
-                      Home Address:{" "}
+                     
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="border-black border text-left flex pl-8">
+                      <label htmlFor=""> Home Address:{" "}</label>
+                     
                       <input
+                      className="w-[100%]"
                         type="text"
                         name="homeAddress"
                         id="homeAddress"
@@ -789,10 +799,12 @@ export default function page() {
                         value={homeAddress}
                         onChange={(e) => setHomeAddress(e.target.value)}
                       />{" "}
-                    </td>
-                    <td className="border-black border text-left px-8">
-                      Email :
+                    </div>
+                    <div className="border-black border text-left flex pl-8">
+                      <label htmlFor=""> Email:</label>
+                     
                       <input
+                      className="w-[100%]"
                         type="text"
                         name="studentEmail"
                         id="studentEmail"
@@ -801,9 +813,10 @@ export default function page() {
                         value={studentEmail}
                         onChange={(e) => setStudentEmail(e.target.value)}
                       />
-                    </td>
-                  </tr>
-                </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
 
@@ -887,7 +900,7 @@ export default function page() {
                       />
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td className="border-black border text-left font-bold ">
                       Others
                     </td>
@@ -941,7 +954,7 @@ export default function page() {
 
                       />
                     </td>
-                  </tr>
+                  </tr> */}
                 </table>
               </div>
             </div>

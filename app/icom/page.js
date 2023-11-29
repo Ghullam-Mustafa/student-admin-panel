@@ -24,7 +24,7 @@ export default function Page() {
                 studentData.push({
                     id: doc.id,
                     ...doc.data(),
-                    selectedCourse: "F.Sc Medical",
+                    selectedCourse: "I.Com",
                 });
             });
             console.log("studentData", studentData);

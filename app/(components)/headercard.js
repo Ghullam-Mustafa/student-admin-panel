@@ -7,150 +7,258 @@ import Image from 'next/image';
 import { HiUserGroup } from 'react-icons/hi'
 import { FcOvertime } from 'react-icons/fc'
 import { ImBooks } from 'react-icons/im'
-
-
+import DashboardNavbar from './dashboardNavbar';
 
 export default function Headercard() {
   const [loading, setLoading] = useState(false);
-  const [student, setstudent] = useState([]);
-  const [courses, setcourses] = useState([]);
-  const [atendence, setatendence] = useState([]);
+  const [fscMedicalStudent, setFscMedicalStudent] = useState([]);
+  const [fscEngineeringStudent, setFscEngineeringStudent] = useState([]);
+  const [icsPhysicsStudent, setIcsPhysicsStudent] = useState([]);
+  const [icsStatisticStudent, setIcsStatisticStudent] = useState([]);
+  const [iComStudent, setIcomStudent] = useState([]);
+  const [faItStudent, setFaItStudent] = useState([]);
 
-
-
-  const fetchData = async () => {
+  const fscMeical = async () => {
     try {
-      setLoading(true)
-      const collections = collection(db, "students");
-      const docs = await getDocs(collections);
-      const studentdata = [];
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'F.Sc Medical'));
+      const docs = await getDocs(q);
+      const studentData = [];
       docs.forEach((doc) => {
-        studentdata.push({
+        studentData.push({
           id: doc.id,
           ...doc.data(),
+          selectedCourse: "F.Sc Medical",
         });
       });
-      setstudent(studentdata);
+      setFscMedicalStudent(studentData);
     } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false); // Set loading to false after fetching
+      console.error(error);
     }
   };
 
-
-
-
-  const fetchcourses = async () => {
+  const fscEngineering = async () => {
     try {
-      // setLoading(true);
-      const collections = collection(db, "courses");
-      const docs = await getDocs(collections);
-      const studentdata = [];
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'F.Sc Pre-Engineering'));
+      const docs = await getDocs(q);
+      const studentData = [];
       docs.forEach((doc) => {
-        studentdata.push({
+        studentData.push({
           id: doc.id,
           ...doc.data(),
+          selectedCourse: "F.Sc Pre-Engineering",
         });
       });
-      setcourses(studentdata);
+      setFscEngineeringStudent(studentData);
     } catch (error) {
-      console.log(error);
-    } finally {
-      // setLoading(false); // Set loading to false after fetching
+      console.error(error);
     }
   };
 
-  const fetchAttendense = async () => {
+  const icsPhysics = async () => {
     try {
-      // setLoading(true);
-      const collections = collection(db, "attendence");
-      // const queryRef = query(collections, where("isPresent", "==", true));
-      const docs = await getDocs(collections);
-      const studentdata = [];
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'ICS (Physics)'));
+      const docs = await getDocs(q);
+      const studentData = [];
       docs.forEach((doc) => {
-        studentdata.push({
+        studentData.push({
           id: doc.id,
           ...doc.data(),
+          selectedCourse: "ICS (Physics)",
         });
       });
-      setatendence(studentdata);
+      setIcsPhysicsStudent(studentData);
     } catch (error) {
-      console.log(error);
-    } finally {
-      // setLoading(false); // Set loading to false after fetching
+      console.error(error);
+    }
+  };
+
+  const icsStatistic = async () => {
+    try {
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'ICS (Statistics)'));
+      const docs = await getDocs(q);
+      const studentData = [];
+      docs.forEach((doc) => {
+        studentData.push({
+          id: doc.id,
+          ...doc.data(),
+          selectedCourse: "ICS (Statistics)",
+        });
+      });
+      setIcsStatisticStudent(studentData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const iCom = async () => {
+    try {
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'I.Com'));
+      const docs = await getDocs(q);
+      const studentData = [];
+      docs.forEach((doc) => {
+        studentData.push({
+          id: doc.id,
+          ...doc.data(),
+          selectedCourse: "I.Com",
+        });
+      });
+      setIcomStudent(studentData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const faIt = async () => {
+    try {
+      const attendanceCollection = collection(db, 'AddmissionForm');
+      const q = query(attendanceCollection, where('selectedCourse', '==', 'F.A(IT)'));
+      const docs = await getDocs(q);
+      const studentData = [];
+      docs.forEach((doc) => {
+        studentData.push({
+          id: doc.id,
+          ...doc.data(),
+          selectedCourse: "F.A(IT)",
+        });
+      });
+      setFaItStudent(studentData);
+    } catch (error) {
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchData();
-    fetchcourses()
-    fetchAttendense()
+    fscMeical();
+    fscEngineering();
+    icsPhysics();
+    icsStatistic();
+    iCom();
+    faIt();
   }, []);
-
 
   return (
     <>
 
+      <DashboardNavbar />
+
       <p className="text-gray-700 text-3xl mb-16 font-bold">Dashboard</p>
+
 
       <div className="grid lg:grid-cols-3 gap-5 mb-16">
         <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
           <div className="flex justify-between px-8 py-2 ">
-            <p className="  font-sans text-2xl text-[#7072da] p-2 ">Total Courses</p>
+            <p className="  font-sans text-2xl text-[#7072da] p-2 ">F.Sc Medical Students</p>
+            <div className="">
+              <div className="rounded-full p-2  bg-[#7072da] ">
+                <ImBooks className="text-4xl font-bold" />
+              </div>
+            </div>
+          </div>
+          <div className="font-bold text-[#7072da] mx-10 my-4 text-2xl">
+            {loading ? (<tr className="text-center">
+              <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+                Loading...
+              </td>
+            </tr>) : (fscMedicalStudent.length)}
+          </div>
+        </div>
+        <div className="rounded-lg bg-white h-40 border-b-8  border-[#868a88] shadow-sm">
+          <div className="flex justify-between px-8 py-2 ">
+            <p className="  font-sans text-2xl p-2 text-[#93A29B] ">
+              F.Sc Pre-Engineering</p>
+            <div className="">
+              <div className="rounded-full p-2 bg-[#868a88] ">
+                <HiUserGroup className="text-4xl" />
+              </div>
+            </div>
+          </div>
+          <div className="font-bold text-[#868a88] mx-10 my-4 text-2xl">
+
+            {loading ? (
+              <tr className="text-center">
+                <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
+                  Loading...
+                </td>
+              </tr>
+            ) : (fscEngineeringStudent.length)}
+          </div>
+        </div>
+        <div className="rounded-lg bg-white border-b-8  border-[#8B635C] h-40 shadow-sm">
+          <div className="flex justify-between px-8 py-2 ">
+            <p className="  font-sans text-2xl p-2 text-[#8B635C] ">ICS (Physics) Students </p>
+            <div className=""><div className="rounded-full p-2 bg-[#8B635C] ">
+              <FcOvertime className="text-4xl" />
+            </div></div>
+          </div>
+          <div className="font-bold text-[#8B635C] mx-10 my-4 text-2xl">
+
+            {loading ? (
+              <tr className="text-center">
+                <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
+                  Loading...
+                </td>
+              </tr>
+            ) : (icsPhysicsStudent.length)}
+          </div>
+        </div>
+        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
+          <div className="flex justify-between px-8 py-2 ">
+            <p className="  font-sans text-2xl text-[#7072da] p-2 ">ICS (Statistics) Students</p>
+            <div className="">
+              <div className="rounded-full p-2  bg-[#7072da] ">
+                <ImBooks className="text-4xl font-bold" />
+              </div></div>
+          </div>
+          <div className="font-bold text-[#7072da] mx-10 my-4 text-2xl">
+            {loading ? (<tr className="text-center">
+              <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+                Loading...
+              </td>
+            </tr>) : (icsStatisticStudent.length)}
+          </div>
+        </div>
+        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
+          <div className="flex justify-between px-8 py-2 ">
+            <p className="  font-sans text-2xl text-[#7072da] p-2 ">I.Com Students</p>
+            <div className="">
+              <div className="rounded-full p-2  bg-[#7072da] ">
+                <ImBooks className="text-4xl font-bold" />
+              </div>
+            </div>
+          </div>
+          <div className="font-bold text-[#7072da] mx-10 my-10 text-2xl">
+            {loading ? (<tr className="text-center">
+              <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+                Loading...
+              </td>
+            </tr>) : (iComStudent.length)}
+          </div>
+        </div>
+        <div className="rounded-lg bg-white h-40 shadow-sm border-b-8 border-[#7072da] ">
+          <div className="flex justify-between px-8 py-2 ">
+            <p className="  font-sans text-2xl text-[#7072da] p-2 ">F.A(IT) Students</p>
 
             <div className="rounded-full p-2  bg-[#7072da] ">
               <ImBooks className="text-4xl font-bold" />
             </div>
           </div>
-          <div className="font-bold text-[#7072da] m-10 text-2xl">
+          <div className="font-bold text-[#7072da] mx-10 my-10 text-2xl">
             {loading ? (<tr className="text-center">
-                                <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
-                                    Loading...
-                                </td>
-                            </tr>):(courses.length)}
-          </div>
-        </div>
-        <div className="rounded-lg bg-white h-40 border-b-8  border-[#868a88] shadow-sm">
-          <div className="flex justify-between px-8 py-2 ">
-            <p className="  font-sans text-2xl p-2 text-[#93A29B] ">Total Students</p>
-            <div className="rounded-full p-2 bg-[#868a88] ">
-              <HiUserGroup className="text-4xl" />
-            </div>
-          </div>
-          <div className="font-bold text-[#868a88] m-10 text-2xl">
-
-            {loading ? (
-                            <tr className="text-center">
-                                <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
-                                    Loading...
-                                </td>
-                            </tr>
-                        ):(student.length)}
-          </div>
-        </div>
-        <div className="rounded-lg bg-white border-b-8  border-[#8B635C] h-40 shadow-sm">
-          <div className="flex justify-between px-8 py-2 ">
-            <p className="  font-sans text-2xl p-2 text-[#8B635C] ">Total Attendence</p>
-            <div className="rounded-full p-2 bg-[#8B635C] ">
-              <FcOvertime className="text-4xl" />
-            </div>
-          </div>
-          <div className="font-bold text-[#8B635C] m-10 text-2xl">
-        
-          {loading ? (
-                            <tr className="text-center">
-                                <td colSpan="4" className="text-xl text-[#868a88] font-bold mt-10">
-                                    Loading...
-                                </td>
-                            </tr>
-                        ):(atendence.length)}
+              <td colSpan="4" className="text-xl text-[#7072da] font-bold mt-10">
+                Loading...
+              </td>
+            </tr>) : (faItStudent.length)}
           </div>
         </div>
       </div>
-      <div className="grid col-1 bg-white h-96 rounded-lg  shadow-sm">
+      {/* <div className="grid col-1 bg-white h-96 rounded-lg  shadow-sm">
         <Image src="/graph.png" alt="graph" height={100} width={1000} />
-      </div>
+      </div> */}
     </>
   )
 }

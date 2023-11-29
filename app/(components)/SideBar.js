@@ -54,7 +54,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/mainDashBoard">
+        <Link href="/dashboard">
           <div
             className={`pl-6 py-2 mx-5 text-center cursor-pointer rounded-full  hover:drop-shadow-2xl mb-3 flex items-center transition-colors ${router.pathname == "/"
               ? "bg-orange-100 text-[#9697DB]"
