@@ -268,6 +268,7 @@ export default function AddmissionFormm
     // setOtherTotalMarks('');
     // Assuming setImageSrc is a valid function
     // setImageSrc('');
+    setFile('');
   };
 
 
@@ -802,8 +803,9 @@ export default function AddmissionFormm
                         />{" "}
                       </div>
                       <div className="border-black border text-left flex pl-8">
-                        <label htmlFor=""> Email:</label>
-
+                        <div className="justify-center items-center flex">
+                        <label htmlFor="" > Email:</label>
+                        </div>
                         <input
                           className="w-[100%]"
                           type="text"

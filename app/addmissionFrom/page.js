@@ -267,6 +267,7 @@ export default function page() {
     // setOtherTotalMarks('');
     // Assuming setImageSrc is a valid function
     // setImageSrc('');
+    setFile('');
   };
 
 
@@ -801,7 +802,9 @@ export default function page() {
                       />{" "}
                     </div>
                     <div className="border-black border text-left flex pl-8">
-                      <label htmlFor=""> Email:</label>
+                    <div className="justify-center items-center flex">
+                        <label htmlFor="" > Email:</label>
+                        </div>
                      
                       <input
                       className="w-[100%]"
