@@ -52,12 +52,12 @@ export default function Page() {
                     return <>
                         <div key={i} className=" border-silver border-2 rounded-lg p-5">
                             <div className="   w-[20%]">
-                                <img className=' items-center justify-center' src={item.projectImage} alt="" />
+                                <img className=' items-center justify-center' src={item.projectImage} alt="" />      
                             </div>
                             <div>
                                 <p className='text-sm font-bold my-4'>Student Name : <span className='text-sm font-normal bg-slate-50 px-2 py-2 rounded-lg'>{item.studentName}</span> </p>
                                 <p className='text-sm font-bold my-4'>Father Name : <span className='text-sm font-normal bg-slate-50 px-2 py-2 rounded-lg'> {item.fatherName}</span></p>
-                                <p className='text-sm font-bold my-4'>Student Contact Number : <span className='text-sm font-normal bg-slate-50 px-2 py-2 rounded-lg'>{item.studentPhoneNumber}</span></p>
+                                <p className='text-sm font-bold my-4'>Student Contact Number : <span className='text-sm font-normal bg-slate-50 px-2 py-2 rounded-lg'>{item.studentphoneNumber}</span></p>
                                 <p className='text-sm font-bold my-4'>Student WhatsApp Number : <span className='text-sm font-normal  bg-slate-50 px-2 py-2 rounded-lg'>{item.studentWhatsappNumber}</span></p>
                                 <p className='text-sm font-bold my-4'>Student Email : <span className='text-sm font-normal bg-slate-50 px-2 py-2 rounded-lg'>{item.studentEmail}</span></p>
                                 <p className='text-sm font-bold my-4'>Student CNIC : <span className='text-sm font-normal bg-slate-50 px-2 py-2 rounded-lg'>{item.studentCnic}</span></p>

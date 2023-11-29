@@ -76,23 +76,23 @@ export default function page() {
   //     reader.readAsDataURL(file);
   //   }
   // };
-  
+
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       setFile(file); // Add this line to update the file state
       const reader = new FileReader();
-  
+
       reader.onload = (event) => {
         const result = event.target?.result;
         setImageSrc(result);
       };
-  
+
       reader.readAsDataURL(file);
     }
   };
-  
+
 
 
 
@@ -138,6 +138,8 @@ export default function page() {
       OtherObtainedMarks,
       otherInsitute,
       othetTotalMarks,
+
+
     };
 
     // const isValid = await userSchema.isValid(AddmissionForm)
@@ -209,6 +211,7 @@ export default function page() {
           console.log(studendData);
 
           AddProjectData(studendData);
+
         });
       }
     );
@@ -231,6 +234,39 @@ export default function page() {
         return;
       }
     };
+
+    window.location.reload();
+  };
+
+  const clear = () => {
+    setSelectedCourse('');
+    setAdmissionType('');
+    setStudentName('');
+    setStudentPhoneNumber('');
+    setStudentCnic('');
+    setStudentWhatsappNumber('');
+    setMarkOfIdentification('');
+    setDateOfBirth('');
+    setFatherName('');
+    setFatherPhoneNumber('');
+    setFahterCnic('');
+    setFatherWhatsappNumber('');
+    setFatherOccupation('');
+    setReligion('');
+    setHomeAddress('');
+    setStudentEmail('');
+    setMatriculationYear('');
+    setBoardRollNo('');
+    setObtainedMarks('');
+    setTotalMarks('');
+    setinsitute('');
+    setOtherYear('');
+    setOtherRollNo('');
+    setOtherObtainedMarks('');
+    setOthertinsitute('');
+    setOtherTotalMarks('');
+    // Assuming setImageSrc is a valid function
+    setImageSrc('');
   };
 
 
@@ -239,12 +275,12 @@ export default function page() {
     <>
 
       {isUploading ? <>
-        <div class="circle-container border-black border-2 h-screen w-[100vh] flex justify-center items-center">
-
+        <div class="circle-container h-screen w-screen flex justify-center items-center">
           <svg fill="none" class="circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <circle class="circle" cx="50" cy="50" r="45" />
           </svg>
         </div>
+
       </> : <>
 
         <div className="bg-white border-2 border-black p-2">
@@ -519,18 +555,18 @@ export default function page() {
                 <table className="w-[100%]">
                   <tr>
                     <td className="border-black border text-left pl-8 flex items-center">
-                   <label htmlFor="">Name: </label>
-                        <input
+                      <label htmlFor="">Name: </label>
+                      <input
                         className="w-[100%] "
-                          type="text"
-                          // name="studentName"
-                          id="studentName"
-                          // placeholder="Enter your Name"
-                          value={studentName}
-                          onChange={(e) => setStudentName(e.target.value)}
-                          required
-                        />{" "}
-                      
+                        type="text"
+                        // name="studentName"
+                        id="studentName"
+                        // placeholder="Enter your Name"
+                        value={studentName}
+                        onChange={(e) => setStudentName(e.target.value)}
+                        required
+                      />{" "}
+
                     </td>
                     <td className="border-black border text-left pl-8 flex">
                       <div className=" justify-center items-center ">
@@ -674,9 +710,9 @@ export default function page() {
                   <tr>
                     {/* <td className='border-black border text-left px-8'>C.N.I.C. / B-form No  <input type='number' pattern='^[0-9]{5}-[0-9]{7}-[0-9]{1}$'  title='Type CNIC Like 12345-1234567-1' required  />   </td> */}
                     <td className="border-black border text-left px-8">
-                      C.N.I.C. / B-form No:
+                      C.N.I.C.:
                       <input
-                        type="text"
+                        type="number"
                         pattern="^[0-9]{13}$"
                         title="Type CNIC Like 12345-1234567-1"
                         required
