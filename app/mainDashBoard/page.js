@@ -65,14 +65,14 @@ export default function Page() {
         <div className="">
           {user && user.email ? (
             <>
-              <div className="text-center flex justify-evenly">
+              {/* <div className="text-center flex justify-evenly">
                 <button
                   className='bg-blue-600 py-3 m-1 px-5 text-white rounded-lg'
                   onClick={handleLogout}
                 >
                   Logout
                 </button>
-              </div>
+              </div> */}
               <DashboardNavbar />
 
 
@@ -80,37 +80,37 @@ export default function Page() {
           ) : (
             <div className='rounded-xl card items-center justify-center flex py-8 '>
               <div className="">
-              <h2 className="text-3xl font-semibold text-center text-blue-600 mb-4">Login Form</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-6">
-                  <label htmlFor="email" className="block text-gray-600 text-lg font-semibold mb-2">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full px-4 py-2 border rounded-lg bg-gray-100"
-                    placeholder="Your email"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-6">
-                  <label htmlFor="password" className="block text-gray-600 text-lg font-semibold mb-2">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="w-full px-4 py-2 border rounded-lg bg-gray-100"
-                    placeholder="Your password"
-                    onChange={handleChange}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white text-lg font-semibold py-2 rounded-lg hover:bg-blue-700"
-                >
-                  Login
-                </button>
-              </form>
+                <h2 className="text-3xl font-semibold text-center text-blue-600 mb-4">Login Form</h2>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-6">
+                    <label htmlFor="email" className="block text-gray-600 text-lg font-semibold mb-2">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="w-full px-4 py-2 border rounded-lg bg-gray-100"
+                      placeholder="Your email"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="mb-6">
+                    <label htmlFor="password" className="block text-gray-600 text-lg font-semibold mb-2">Password</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      className="w-full px-4 py-2 border rounded-lg bg-gray-100"
+                      placeholder="Your password"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-600 text-white text-lg font-semibold py-2 rounded-lg hover:bg-blue-700"
+                  >
+                    Login
+                  </button>
+                </form>
               </div>
             </div>
           )}

@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import {  signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 
 
@@ -8,49 +8,49 @@ export default function dashboardNavbar() {
 
     const handleLogout = () => {
         signOut(auth)
-          .then(() => {
-            setUser(null);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
+            .then(() => {
+                setUser(null);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     return (
         <>
-          <div className="text-center flex justify-evenly">
+            <div className="justify-end flex ">
                 <button
-                  className='bg-blue-600 py-3 m-1 px-5 text-white rounded-lg'
-                  onClick={handleLogout}
+                    className='bg-blue-900 py-3 m-1 px-5 text-white rounded-lg  hover:bg-red-900 '
+                    onClick={handleLogout}
                 >
-                  Logout
+                    Logout
                 </button>
-              </div>
+            </div>
 
-            <nav className="bg-[#D0A5C]  rounded-full p-4">
-                <div className="flex items-center justify-between">
+            <nav className="bg-[#D0A5C]  rounded-full py-4">
+                <div className=" ">
 
 
-                    <div className="grid grid-cols-7 bg-slate-400 rounded-lg ">
-                        <Link href="/dashboard">
-                            <p className="text-white hover:text-gray-300">Dash Board</p>
+                    <div className="grid grid-cols-7 bg-blue-900 rounded-lg ">
+                        <Link href="/dashboard" className='items-center p-2 flex hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white  ">Dash Board</p>
                         </Link>
-                        <Link href="/fscMedical">
-                            <p className="text-white hover:text-gray-300">Fsc Medical</p>
+                        <Link href="/fscMedical" className='items-center p-2 flex  hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white">Fsc Medical</p>
                         </Link>
-                        <Link href="/fscPreEngineering">
-                            <p className="text-white hover:text-gray-300">Fsc PreEngineering</p>
+                        <Link href="/fscPreEngineering" className='items-center p-2 flex  hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white">Fsc Engineering</p>
                         </Link>
-                        <Link href="/icsPhysics">
-                            <p className="text-white hover:text-gray-300">Ics Physics</p>
+                        <Link href="/icsPhysics" className='items-center p-2 flex  hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white ">Ics Physics</p>
                         </Link>
-                        <Link href="/icsStatistic">
-                            <p className="text-white hover:text-gray-300">Ics Statistic</p>
+                        <Link href="/icsStatistic" className='items-center  p-2  flex  hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white ">Ics Statistic</p>
                         </Link>
-                        <Link href="/icom">
-                            <p className="text-white hover:text-gray-300">I.Com</p>
+                        <Link href="/icom" className='items-center p-2 flex  hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white ">I.Com</p>
                         </Link>
-                        <Link href="/faIt">
-                            <p className="text-white hover:text-gray-300">Fa.It</p>
+                        <Link href="/faIt" className='items-center p-2 flex  hover:bg-red-900    hover:rounded-lg justify-center'>
+                            <p className="text-white ">Fa.It</p>
                         </Link>
                     </div>
                 </div>
